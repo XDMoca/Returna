@@ -93,6 +93,7 @@ GameObject:
   - component: {fileID: 114452379732551926}
   - component: {fileID: 95277391146530992}
   - component: {fileID: 114316952114992820}
+  - component: {fileID: 114529123841157206}
   m_Layer: 5
   m_Name: GameManagerAndHUD
   m_TagString: GameController
@@ -195,6 +196,22 @@ MonoBehaviour:
   quoteText: {fileID: 114114044567831424}
   dialoguePanel: {fileID: 114945177893804172}
   timeBetweenLetters: 0.05
+--- !u!114 &114529123841157206
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1646444355001756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a96c65e5291bcac45a5ceed3d9ca4813, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lightChangeDamp: 0.005
+  secondsPerMinute: 1
+  lightChangeTime: 7
+  dayColor: {r: 1, g: 1, b: 1, a: 1}
+  nightColor: {r: 0.2, g: 0.25, b: 0.65, a: 1}
 --- !u!114 &114762655428719340
 MonoBehaviour:
   m_ObjectHideFlags: 1

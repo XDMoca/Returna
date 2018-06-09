@@ -31,7 +31,6 @@ public class SceneTransitionManager : MonoBehaviour {
 
     public void StartSceneTransition(string NextAreaName, ESpawnPointIdentifiers NextAreaSpawnPointIdentifier)
     {
-        print(NextAreaName);
         nextSceneName = NextAreaName;
         nextSceneSpawnPointIdentifier = NextAreaSpawnPointIdentifier;
         animator.SetTrigger("FadeOut");
