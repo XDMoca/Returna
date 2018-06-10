@@ -5,6 +5,8 @@ using UnityEngine;
 public class AttackManager : MonoBehaviour {
 
     [SerializeField]
+    private int attackDamage;
+    [SerializeField]
     private float attackRange;
     [SerializeField]
     private float attackWidth;
@@ -25,6 +27,11 @@ public class AttackManager : MonoBehaviour {
 
         RaycastHit[] hits = Physics.BoxCastAll(transform.position, new Vector3(attackWidth, 1, 0), transform.forward, transform.rotation, attackRange, LayerMask.GetMask(Constants.Layers.Enemy));
         if (hits.Length > 0)
-            Debug.Log("Hit enemy");
+        {
+            foreach(RaycastHit hit in hits)
+            {
+                hit.collider.gameObject.GetComponent<EnemyDamageReceiver>().ReceiveDamage(attackDamage);
+            }
+        }
     }
 }

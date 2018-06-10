@@ -53,7 +53,7 @@ public class TimeManager : MonoBehaviour {
         {
             worldTime = new DateTime(1, 1, 1, 0, 0, 0);
         }
-        print(worldTime.ToString("HH:mm"));
+        //print(worldTime.ToString("HH:mm"));
     }
 
     private void SetTargetColor()
