@@ -12,6 +12,7 @@ public class Constants
         public static readonly string Evade = "Evade";
         public static readonly string LockOn = "LockOn";
         public static readonly string Interact = "Interact";
+        public static readonly string Inventory = "Inventory";
     }
 
     public class Layers

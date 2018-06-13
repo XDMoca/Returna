@@ -224,6 +224,7 @@ GameObject:
   - component: {fileID: 114547521089165422}
   - component: {fileID: 114280347051343292}
   - component: {fileID: 114505602189854588}
+  - component: {fileID: 114118014004480736}
   m_Layer: 0
   m_Name: JunkoChan
   m_TagString: Player
@@ -2000,6 +2001,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114118014004480736
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1188808853138236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50b2d6229f9909f41bbcd168d46a3e3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  items:
+  - item: {fileID: 11400000, guid: 1b504a873bc3d144aa8051a0f1b369ff, type: 2}
+    count: 3
 --- !u!114 &114262708118973426
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2018,6 +2033,7 @@ MonoBehaviour:
     evadePressed: 0
     lockOnPressed: 0
     interactPressed: 0
+    inventoryPressed: 0
 --- !u!114 &114280347051343292
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2116,7 +2132,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8aaf9b4dcdcbb64a880bb4a2c09e69a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpriteForwardDirection: 1
+  MaxHP: 5
+  HP: 5
+  MaxHunger: 100
+  Hunger: 100
+  MaxWokeness: 0
+  Wokeness: 0
 --- !u!136 &136072165475644288
 CapsuleCollider:
   m_ObjectHideFlags: 1

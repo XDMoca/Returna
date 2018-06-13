@@ -17,6 +17,8 @@ public class InputsContainer {
     public bool lockOnPressed = false;
     [ReadOnly]
     public bool interactPressed = false;
+    [ReadOnly]
+    public bool inventoryPressed = false;
 
     public void ClearInputs()
     {
@@ -26,5 +28,6 @@ public class InputsContainer {
         evadePressed = false;
         lockOnPressed = false;
         interactPressed = false;
+        inventoryPressed = false;
     }
 }

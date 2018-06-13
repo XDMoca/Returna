@@ -16,6 +16,8 @@ public class CameraControl : MonoBehaviour {
 	}
 	
 	void LateUpdate () {
+        if (player == null)
+            return;
         transform.position = player.position + (Quaternion.Euler(CameraAngle, 0, 0) * new Vector3(0, DistanceFromPlayer, 0));
         transform.LookAt(player.position);
 	}

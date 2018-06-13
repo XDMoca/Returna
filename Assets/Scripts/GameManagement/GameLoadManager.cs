@@ -11,9 +11,12 @@ public class GameLoadManager : MonoBehaviour {
 
     void Start () {
         GameObject gameManager = GameObject.FindGameObjectWithTag(Constants.Tags.GameController);
-        if(gameManager == null)
+        if (Camera.main == null)
         {
             GameObject.Instantiate(CameraPrefab);
+        }
+        if (gameManager == null)
+        {
             GameObject.Instantiate(GameManagerPrefab);
         }
 	}
