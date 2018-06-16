@@ -26,6 +26,8 @@ public class InputManager : MonoBehaviour {
         inputsContainer.evadePressed = Input.GetButtonDown(Constants.Inputs.Evade);
         inputsContainer.lockOnPressed = Input.GetButtonDown(Constants.Inputs.LockOn);
         inputsContainer.interactPressed = Input.GetButtonDown(Constants.Inputs.Interact);
-        inputsContainer.inventoryPressed = Input.GetButtonDown(Constants.Inputs.Inventory);
-    }
+        inputsContainer.useQuickItemPressed = Input.GetButtonDown(Constants.Inputs.UseQuickItem);
+		inputsContainer.itemBarUpPressed = Input.GetButtonDown(Constants.Inputs.ItemBarUp);
+		inputsContainer.itemBarDownPressed = Input.GetButtonDown(Constants.Inputs.ItemBarDown);
+	}
 }

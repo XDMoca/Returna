@@ -18,9 +18,13 @@ public class InputsContainer {
     [ReadOnly]
     public bool interactPressed = false;
     [ReadOnly]
-    public bool inventoryPressed = false;
+    public bool useQuickItemPressed = false;
+	[ReadOnly]
+	public bool itemBarUpPressed = false;
+	[ReadOnly]
+	public bool itemBarDownPressed = false;
 
-    public void ClearInputs()
+	public void ClearInputs()
     {
         HorizontalMovementInput = 0;
         VerticalMovementInput = 0;
@@ -28,6 +32,8 @@ public class InputsContainer {
         evadePressed = false;
         lockOnPressed = false;
         interactPressed = false;
-        inventoryPressed = false;
+        useQuickItemPressed = false;
+		itemBarUpPressed = false;
+		itemBarDownPressed = false;
     }
 }

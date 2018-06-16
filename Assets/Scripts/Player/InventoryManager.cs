@@ -10,9 +10,13 @@ public class InventoryManager : MonoBehaviour {
 
     public List<InventoryItem> items = new List<InventoryItem>();
 
+	private ItemQuickUseBar quickUseBar;
+
 	void Start () {
         playerStatus = GetComponent<PlayerStatusManager>();
         inputManager = GetComponent<InputManager>();
+		quickUseBar = GameObject.FindObjectOfType<ItemQuickUseBar>();
+		quickUseBar.setItems(items.ToArray());
 	}
 	
 	void Update () {
@@ -21,14 +25,26 @@ public class InventoryManager : MonoBehaviour {
 
     private void CheckInput()
     {
-        if (inputManager.inputsContainer.inventoryPressed)
+        if (inputManager.inputsContainer.useQuickItemPressed)
         {
-            UseItem(items[0]);
-        }
-    }
+            UseSelectedQuickItem(quickUseBar.GetSelectedItem());
+			quickUseBar.setItems(items.ToArray());
+		}
+		if (inputManager.inputsContainer.itemBarDownPressed)
+		{
+			quickUseBar.SelectNextItem();
+		}
+		if (inputManager.inputsContainer.itemBarUpPressed)
+		{
+			quickUseBar.SelectPreviousItem();
+		}
+	}
 
-    private void UseItem(InventoryItem item)
+    private void UseSelectedQuickItem(InventoryItem item)
     {
+		if (item.count <= 0)
+			return;
+
         --item.count;
         playerStatus.UseItem(item.item);
     }

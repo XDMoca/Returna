@@ -2015,6 +2015,10 @@ MonoBehaviour:
   items:
   - item: {fileID: 11400000, guid: 1b504a873bc3d144aa8051a0f1b369ff, type: 2}
     count: 3
+  - item: {fileID: 11400000, guid: 4dfeea32c52e7ba48ab494d7a48aa781, type: 2}
+    count: 1
+  - item: {fileID: 11400000, guid: bc26f623a5fd3b54f84125a775a3ec00, type: 2}
+    count: 2
 --- !u!114 &114262708118973426
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2033,7 +2037,9 @@ MonoBehaviour:
     evadePressed: 0
     lockOnPressed: 0
     interactPressed: 0
-    inventoryPressed: 0
+    useQuickItemPressed: 0
+    itemBarUpPressed: 0
+    itemBarDownPressed: 0
 --- !u!114 &114280347051343292
 MonoBehaviour:
   m_ObjectHideFlags: 1

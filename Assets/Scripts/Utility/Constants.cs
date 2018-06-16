@@ -12,8 +12,10 @@ public class Constants
         public static readonly string Evade = "Evade";
         public static readonly string LockOn = "LockOn";
         public static readonly string Interact = "Interact";
-        public static readonly string Inventory = "Inventory";
-    }
+        public static readonly string UseQuickItem = "UseQuickItem";
+		public static readonly string ItemBarUp = "ItemBarUp";
+		public static readonly string ItemBarDown = "ItemBarDown";
+	}
 
     public class Layers
     {
