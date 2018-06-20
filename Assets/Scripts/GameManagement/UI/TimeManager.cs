@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -21,12 +22,15 @@ public class TimeManager : MonoBehaviour {
     private Color targetColor;
 
     private new Light light;
+
+	private ITickable[] tickables;
     
 
     void Start () {
         worldTime = new DateTime(1, 1, 1, 6, 50, 0);
         SetupLightReference();
         targetColor = dayColor;
+		tickables = GameObject.FindGameObjectWithTag(Constants.Tags.Player).GetComponents<ITickable>();
         SceneManager.sceneLoaded += OnLevelLoaded;
         StartCoroutine(Tick());
 	}
@@ -43,6 +47,7 @@ public class TimeManager : MonoBehaviour {
         {
             yield return new WaitForSeconds(secondsPerMinute);
             IncrementTime();
+			AdvanceTimeForAllTickableObjects();
         }
     }
 
@@ -89,6 +94,14 @@ public class TimeManager : MonoBehaviour {
         }
 
     }
+
+	private void AdvanceTimeForAllTickableObjects()
+	{
+		foreach (ITickable tickable in tickables)
+		{
+			tickable.Tick();
+		}
+	}
 
     public void OnLevelLoaded(Scene scene, LoadSceneMode loadSceneMode)
     {

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Meat
   HPIncrease: 2
-  HungerIncrease: 10
+  HungerIncrease: 100
   Description: Meat cooked to it's true potential

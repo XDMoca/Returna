@@ -14,7 +14,7 @@ public class SceneTransitionManager : MonoBehaviour {
     [SerializeField]
     private GameObject playerPrefab;
 
-    void Start () {
+    void Awake () {
         animator = GetComponent<Animator>();
         SceneManager.sceneLoaded += OnLevelLoaded;
 

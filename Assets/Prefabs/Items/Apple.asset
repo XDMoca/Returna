@@ -13,5 +13,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Apple
   HPIncrease: 5
-  HungerIncrease: 5
+  HungerIncrease: 50
   Description: Fresh Apple
