@@ -8,6 +8,7 @@ public class StatusIndicator : MonoBehaviour {
 	private Animator animator;
 	private SpriteRenderer sprite;
 	private PlayerStatusManager playerStatus;
+	private EStatus currentStatus;
 
 	[HideInInspector]
 	public Transform player;
@@ -37,23 +38,32 @@ public class StatusIndicator : MonoBehaviour {
 			return;
 		sprite.enabled = false;
 		animator.SetBool("Hungry", false);
+		animator.SetBool("Tired", false);
 	}
 
 	public void Show(EStatus status)
 	{
-		if (sprite == null || sprite.enabled)
+		if (currentStatus == status)
 			return;
-
-		if (!sprite.enabled)
-		{
-			animator.SetTrigger("Appear");
-		}
-		sprite.enabled = true;
+		
 		SetStatusType(status);
+		sprite.enabled = true;
 	}
 
 	private void SetStatusType(EStatus status)
 	{
-		animator.SetBool("Hungry", true);
+		currentStatus = status;
+		animator.SetTrigger("Appear");
+		switch (status)
+		{
+			case EStatus.Hungry:
+				animator.SetBool("Hungry", true);
+				animator.SetBool("Tired", false);
+				break;
+			case EStatus.Tired:
+				animator.SetBool("Tired", true);
+				animator.SetBool("Hungry", false);
+				break;
+		}
 	}
 }

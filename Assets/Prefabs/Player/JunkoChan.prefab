@@ -226,6 +226,7 @@ GameObject:
   - component: {fileID: 114505602189854588}
   - component: {fileID: 114118014004480736}
   - component: {fileID: 114791031102335772}
+  - component: {fileID: 114569395896343872}
   m_Layer: 0
   m_Name: JunkoChan
   m_TagString: Player
@@ -2128,6 +2129,23 @@ MonoBehaviour:
   interactionDetectionRange: 2
   interactionDetectionWidth: 1
   DebugMode: 0
+--- !u!114 &114569395896343872
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1188808853138236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d59cfe037ec3e854bba62b8729c58a7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxWokeness: 100
+  Wokeness: 25
+  WokenessDecreasePerWorldMinute: 1
+  WokenessIndicatorThreshold: 20
+  StatDecreaseThreshold: 20
+  HPLossPerZeroWokenessTick: 1
 --- !u!114 &114698842502821180
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2141,8 +2159,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHP: 5
   HP: 5
-  MaxWokeness: 0
-  Wokeness: 0
   statusIndicatorPrefab: {fileID: 1163824604250226, guid: 1c30846ce10a51943addbd250508b720,
     type: 2}
 --- !u!114 &114791031102335772
@@ -2157,7 +2173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHunger: 100
-  Hunger: 50
+  Hunger: 100
   HungerDecreasePerWorldMinute: 1
   HungerIndicatorThreshold: 40
   StatDecreaseThreshold: 20

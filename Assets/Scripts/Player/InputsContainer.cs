@@ -23,6 +23,8 @@ public class InputsContainer {
 	public bool itemBarUpPressed = false;
 	[ReadOnly]
 	public bool itemBarDownPressed = false;
+	[ReadOnly]
+	public bool sleepPressed = false;
 
 	public void ClearInputs()
     {
@@ -35,5 +37,6 @@ public class InputsContainer {
         useQuickItemPressed = false;
 		itemBarUpPressed = false;
 		itemBarDownPressed = false;
+		sleepPressed = false;
     }
 }

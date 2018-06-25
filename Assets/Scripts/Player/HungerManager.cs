@@ -71,8 +71,8 @@ public class HungerManager : MonoBehaviour, ITickable {
 		}
 	}
 
-	public bool IsHungry()
+	public bool IsHungry
 	{
-		return Hunger < HungerIndicatorThreshold;
+		get { return Hunger < HungerIndicatorThreshold; }
 	}
 }

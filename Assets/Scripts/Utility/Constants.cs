@@ -15,6 +15,7 @@ public class Constants
         public static readonly string UseQuickItem = "UseQuickItem";
 		public static readonly string ItemBarUp = "ItemBarUp";
 		public static readonly string ItemBarDown = "ItemBarDown";
+		public static readonly string Sleep = "Sleep";
 	}
 
     public class Layers

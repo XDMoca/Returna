@@ -351,6 +351,7 @@ MonoBehaviour:
   lightChangeTime: 7
   dayColor: {r: 1, g: 1, b: 1, a: 1}
   nightColor: {r: 0.2, g: 0.25, b: 0.65, a: 1}
+  SleepHours: 7
 --- !u!114 &114657646224113740
 MonoBehaviour:
   m_ObjectHideFlags: 1

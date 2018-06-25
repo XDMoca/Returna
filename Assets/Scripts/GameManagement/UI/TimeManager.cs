@@ -22,11 +22,16 @@ public class TimeManager : MonoBehaviour {
     private Color targetColor;
 
     private new Light light;
+	private Animator animator;
 
 	private ITickable[] tickables;
+
+	[SerializeField]
+	private int SleepHours;
     
 
     void Start () {
+		animator = GetComponent<Animator>();
         worldTime = new DateTime(1, 1, 1, 6, 50, 0);
         SetupLightReference();
         targetColor = dayColor;
@@ -54,10 +59,7 @@ public class TimeManager : MonoBehaviour {
     private void IncrementTime()
     {
         worldTime = worldTime.AddMinutes(1);
-        if (worldTime.Day > 1)
-        {
-            worldTime = new DateTime(1, 1, 1, 0, 0, 0);
-        }
+		setDayToZero();
         //print(worldTime.ToString("HH:mm"));
     }
 
@@ -84,15 +86,7 @@ public class TimeManager : MonoBehaviour {
     private void SetupLightReference()
     {
         light = GameObject.FindGameObjectWithTag(Constants.Tags.AreaLight).GetComponent<Light>();
-        if (worldTime.Hour < lightChangeTime || worldTime.Hour >= lightChangeTime + 12)
-        {
-            light.color = nightColor;
-        }
-        else
-        {
-            light.color = dayColor;
-        }
-
+		setLightColorInstantly();
     }
 
 	private void AdvanceTimeForAllTickableObjects()
@@ -107,4 +101,36 @@ public class TimeManager : MonoBehaviour {
     {
         SetupLightReference();
     }
+
+	public void StartSleep()
+	{
+		animator.SetTrigger("FadeInThenOut");
+	}
+
+	private void AdvanceTimeForSleep()
+	{
+		worldTime = worldTime.AddHours(SleepHours);
+		setDayToZero();
+		setLightColorInstantly();
+	}
+
+	private void setDayToZero()
+	{
+		if (worldTime.Day > 1)
+		{
+			worldTime = new DateTime(1, 1, 1, 0, 0, 0);
+		}
+	}
+
+	private void setLightColorInstantly()
+	{
+		if (worldTime.Hour < lightChangeTime || worldTime.Hour >= lightChangeTime + 12)
+		{
+			light.color = nightColor;
+		}
+		else
+		{
+			light.color = dayColor;
+		}
+	}
 }

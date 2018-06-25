@@ -8,29 +8,31 @@ public class PlayerStatusManager : MonoBehaviour {
     private int MaxHP;
     [SerializeField]
     private int HP;
-    [SerializeField]
-    private float MaxWokeness;
-    [SerializeField]
-    private float Wokeness;
 
 	[SerializeField]
 	private GameObject statusIndicatorPrefab;
 	private StatusIndicator statusIndicator;
 
 	private HungerManager hungerManager;
+	private SleepManager sleepManager;
 
 	private void Start()
 	{
 		hungerManager = GetComponent<HungerManager>();
+		sleepManager = GetComponent<SleepManager>();
 		statusIndicator = GameObject.Instantiate(statusIndicatorPrefab).GetComponent<StatusIndicator>();
 		statusIndicator.player = transform;
 	}
 
 	private void Update()
 	{
-		if (hungerManager.IsHungry())
+		if (hungerManager.IsHungry)
 		{
 			statusIndicator.Show(EStatus.Hungry);
+		}
+		else if (sleepManager.IsTired)
+		{
+			statusIndicator.Show(EStatus.Tired);
 		}
 		else
 		{
