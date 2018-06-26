@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,6 +16,9 @@ public class PlayerStatusManager : MonoBehaviour {
 
 	private HungerManager hungerManager;
 	private SleepManager sleepManager;
+
+
+	public event EventHandler OnHPChange;
 
 	private void Start()
 	{
@@ -46,12 +50,30 @@ public class PlayerStatusManager : MonoBehaviour {
         if (HP > MaxHP)
         {
             HP = MaxHP;
-        }
+			HPChanged();
+
+		}
 		hungerManager.EatItem(item.HungerIncrease);
     }
 
 	public void TakeHPDamage(int damage)
 	{
 		HP -= damage;
+		if (HP <= 0)
+		{
+			HP = 0;
+		}
+		HPChanged();
+	}
+
+	private void HPChanged()
+	{
+		if (OnHPChange != null)
+			OnHPChange(this, new EventArgs());
+	}
+
+	public string GetHPInformation()
+	{
+		return "HP: " + HP + "/" + MaxHP;
 	}
 }

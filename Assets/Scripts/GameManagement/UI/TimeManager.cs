@@ -28,12 +28,15 @@ public class TimeManager : MonoBehaviour {
 
 	[SerializeField]
 	private int SleepHours;
+
+	public event EventHandler OnTick;
     
 
     void Start () {
 		animator = GetComponent<Animator>();
         worldTime = new DateTime(1, 1, 1, 6, 50, 0);
-        SetupLightReference();
+		FireTickEvent();
+		SetupLightReference();
         targetColor = dayColor;
 		tickables = GameObject.FindGameObjectWithTag(Constants.Tags.Player).GetComponents<ITickable>();
         SceneManager.sceneLoaded += OnLevelLoaded;
@@ -53,6 +56,7 @@ public class TimeManager : MonoBehaviour {
             yield return new WaitForSeconds(secondsPerMinute);
             IncrementTime();
 			AdvanceTimeForAllTickableObjects();
+			FireTickEvent();
         }
     }
 
@@ -60,7 +64,6 @@ public class TimeManager : MonoBehaviour {
     {
         worldTime = worldTime.AddMinutes(1);
 		setDayToZero();
-        //print(worldTime.ToString("HH:mm"));
     }
 
     private void SetTargetColor()
@@ -132,5 +135,16 @@ public class TimeManager : MonoBehaviour {
 		{
 			light.color = dayColor;
 		}
+	}
+
+	private void FireTickEvent()
+	{
+		if (OnTick != null)
+			OnTick(this, new EventArgs());
+	}
+
+	public string GetTime()
+	{
+		return worldTime.ToString("HH:mm");
 	}
 }
