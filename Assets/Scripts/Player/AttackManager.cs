@@ -13,13 +13,6 @@ public class AttackManager : MonoBehaviour {
     [SerializeField]
     private bool DebugMode;
 
-    void Start () {
-		
-	}
-	
-	void Update () {
-    }
-
     public void AttackCast()
     {
         if(DebugMode)

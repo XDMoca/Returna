@@ -227,7 +227,7 @@ GameObject:
   - component: {fileID: 114118014004480736}
   - component: {fileID: 114791031102335772}
   - component: {fileID: 114569395896343872}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: JunkoChan
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -2042,6 +2042,7 @@ MonoBehaviour:
     useQuickItemPressed: 0
     itemBarUpPressed: 0
     itemBarDownPressed: 0
+    sleepPressed: 0
 --- !u!114 &114280347051343292
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2141,8 +2142,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxWokeness: 100
-  Wokeness: 25
-  WokenessDecreasePerWorldMinute: 1
+  Wokeness: 100
+  WokenessDecreasePerWorldMinute: 0.25
   WokenessIndicatorThreshold: 20
   StatDecreaseThreshold: 20
   HPLossPerZeroWokenessTick: 1
@@ -2174,7 +2175,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHunger: 100
   Hunger: 100
-  HungerDecreasePerWorldMinute: 1
+  HungerDecreasePerWorldMinute: 0.25
   HungerIndicatorThreshold: 40
   StatDecreaseThreshold: 20
   HPLossPerZeroHungerTick: 1

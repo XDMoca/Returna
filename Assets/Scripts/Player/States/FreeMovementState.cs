@@ -21,7 +21,6 @@ public class FreeMovementState : IPlayerState {
         float movementSpeed = DetermineMovementSpeed(stateManager.lockOnManager);
         Vector3 movementVector = new Vector3(inputs.HorizontalMovementInput, 0, inputs.VerticalMovementInput) * movementSpeed;
         movementVector = Vector3.ClampMagnitude(movementVector, movementSpeed);
-        //transform.Translate(movementVector * Time.deltaTime, Space.World);
         stateManager.rigidbody.MovePosition(transform.position + movementVector * Time.deltaTime);
         SetRotation(movementVector, stateManager.lockOnManager, stateManager.rigidbody, transform);   
     }
