@@ -18,13 +18,13 @@ public class SleepManager : MonoBehaviour, ITickable
 	[SerializeField]
 	private int HPLossPerZeroWokenessTick;
 
-	private PlayerStatusManager playerStatus;
+	private PlayerHealthManager playerHealth;
 	private InputManager inputManager;
 	private TimeManager timeManager;
 
 	void Start()
 	{
-		playerStatus = GetComponent<PlayerStatusManager>();
+		playerHealth = GetComponent<PlayerHealthManager>();
 		inputManager = GetComponent<InputManager>();
 		timeManager = GameObject.FindObjectOfType<TimeManager>();
 	}
@@ -61,7 +61,7 @@ public class SleepManager : MonoBehaviour, ITickable
 	{
 		if (Wokeness <= 0)
 		{
-			playerStatus.TakeHPDamage(HPLossPerZeroWokenessTick);
+			playerHealth.TakeHPDamage(HPLossPerZeroWokenessTick);
 		}
 	}
 

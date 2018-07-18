@@ -23,8 +23,9 @@ public class InputManager : MonoBehaviour {
         inputsContainer.HorizontalMovementInput = Input.GetAxisRaw(Constants.Inputs.Horizontal);
         inputsContainer.VerticalMovementInput = Input.GetAxisRaw(Constants.Inputs.Vertical);
         inputsContainer.attackPressed = Input.GetButtonDown(Constants.Inputs.Attack);
-        inputsContainer.evadePressed = Input.GetButtonDown(Constants.Inputs.Evade);
-        inputsContainer.lockOnPressed = Input.GetButtonDown(Constants.Inputs.LockOn);
+        inputsContainer.blockPressed = Input.GetButtonDown(Constants.Inputs.Block);
+		inputsContainer.blockReleased = Input.GetButtonUp(Constants.Inputs.Block);
+		inputsContainer.lockOnPressed = Input.GetButtonDown(Constants.Inputs.LockOn);
         inputsContainer.interactPressed = Input.GetButtonDown(Constants.Inputs.Interact);
         inputsContainer.useQuickItemPressed = Input.GetButtonDown(Constants.Inputs.UseQuickItem);
 		inputsContainer.itemBarUpPressed = Input.GetButtonDown(Constants.Inputs.ItemBarUp);

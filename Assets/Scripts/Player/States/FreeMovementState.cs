@@ -60,9 +60,9 @@ public class FreeMovementState : IPlayerState {
         {
             return stateManager.states.Attack;
         }
-        if (inputs.evadePressed)
+        if (inputs.blockPressed)
         {
-            return stateManager.states.Evade;
+            return stateManager.states.Block;
         }
 
         return this;

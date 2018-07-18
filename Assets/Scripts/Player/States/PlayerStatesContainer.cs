@@ -7,6 +7,6 @@ public class PlayerStatesContainer
 {
     public FreeMovementState FreeMovement;
     public AttackState Attack;
-    public EvadeState Evade;
+    public BlockState Block;
     public InteractState Interact;
 }

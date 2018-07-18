@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAttackManager : MonoBehaviour {
+public class EnemyAttackManager : MonoBehaviour
+{
 
 	[SerializeField]
 	private int attackDamage;
@@ -23,7 +24,7 @@ public class EnemyAttackManager : MonoBehaviour {
 		{
 			foreach (RaycastHit hit in hits)
 			{
-				hit.collider.gameObject.GetComponent<PlayerStatusManager>().TakeHPDamage(attackDamage);
+				hit.collider.gameObject.GetComponent<PlayerHealthManager>().TakeCombatDamage(attackDamage);
 			}
 		}
 	}

@@ -17,10 +17,10 @@ public class HungerManager : MonoBehaviour, ITickable {
 	[SerializeField]
 	private int HPLossPerZeroHungerTick;
 
-	private PlayerStatusManager playerStatus;
+	private PlayerHealthManager playerHealth;
 
 	void Start () {
-		playerStatus = GetComponent<PlayerStatusManager>();
+		playerHealth = GetComponent<PlayerHealthManager>();
 	}
 
 	public void Tick()
@@ -50,7 +50,7 @@ public class HungerManager : MonoBehaviour, ITickable {
 	{
 		if (Hunger <= 0)
 		{
-			playerStatus.TakeHPDamage(HPLossPerZeroHungerTick);
+			playerHealth.TakeHPDamage(HPLossPerZeroHungerTick);
 		}
 	}
 

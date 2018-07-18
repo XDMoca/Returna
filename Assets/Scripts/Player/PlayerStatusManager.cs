@@ -5,25 +5,19 @@ using UnityEngine;
 
 public class PlayerStatusManager : MonoBehaviour {
 
-    [SerializeField]
-    private int MaxHP;
-    [SerializeField]
-    private int HP;
-
 	[SerializeField]
 	private GameObject statusIndicatorPrefab;
 	private StatusIndicator statusIndicator;
 
 	private HungerManager hungerManager;
 	private SleepManager sleepManager;
-
-
-	public event EventHandler OnHPChange;
+	private PlayerHealthManager healthManager;
 
 	private void Start()
 	{
 		hungerManager = GetComponent<HungerManager>();
 		sleepManager = GetComponent<SleepManager>();
+		healthManager = GetComponent<PlayerHealthManager>();
 		statusIndicator = GameObject.Instantiate(statusIndicatorPrefab).GetComponent<StatusIndicator>();
 		statusIndicator.player = transform;
 	}
@@ -46,34 +40,7 @@ public class PlayerStatusManager : MonoBehaviour {
 
 	public void UseItem(ConsumableItem item)
     {
-        HP += item.HPIncrease;
-        if (HP > MaxHP)
-        {
-            HP = MaxHP;
-			HPChanged();
-
-		}
+		healthManager.UseItem(item.HPIncrease);
 		hungerManager.EatItem(item.HungerIncrease);
     }
-
-	public void TakeHPDamage(int damage)
-	{
-		HP -= damage;
-		if (HP <= 0)
-		{
-			HP = 0;
-		}
-		HPChanged();
-	}
-
-	private void HPChanged()
-	{
-		if (OnHPChange != null)
-			OnHPChange(this, new EventArgs());
-	}
-
-	public string GetHPInformation()
-	{
-		return "HP: " + HP + "/" + MaxHP;
-	}
 }

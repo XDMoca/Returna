@@ -9,7 +9,7 @@ public class Constants
         public static readonly string Horizontal = "Horizontal";
         public static readonly string Vertical = "Vertical";
         public static readonly string Attack = "Attack";
-        public static readonly string Evade = "Evade";
+        public static readonly string Block = "Block";
         public static readonly string LockOn = "LockOn";
         public static readonly string Interact = "Interact";
         public static readonly string UseQuickItem = "UseQuickItem";
