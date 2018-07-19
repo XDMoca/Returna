@@ -3,38 +3,33 @@ using UnityEngine;
 
 public class PlayerHealthManager : MonoBehaviour
 {
-
-
-	[SerializeField]
-	private int MaxHP;
-	[SerializeField]
-	private int HP;
-
+	private CharacterStats playerStats;
 	public event EventHandler OnHPChange;
 
 	private PlayerStateManager stateManager;
 
-	void Start()
+	void Awake()
 	{
 		stateManager = GetComponent<PlayerStateManager>();
+		playerStats = AssetLoadHelper.GetPlayerStats();
 	}
 
 	public void UseItem(int hpIncrease)
 	{
-		HP += hpIncrease;
-		if (HP > MaxHP)
+		playerStats.HP += hpIncrease;
+		if (playerStats.HP > playerStats.MaxHP)
 		{
-			HP = MaxHP;
+			playerStats.HP = playerStats.MaxHP;
 			HPChanged();
 		}
 	}
 
 	public void TakeHPDamage(int damage)
 	{
-		HP -= damage;
-		if (HP <= 0)
+		playerStats.HP -= damage;
+		if (playerStats.HP <= 0)
 		{
-			HP = 0;
+			playerStats.HP = 0;
 		}
 		HPChanged();
 	}
@@ -51,5 +46,5 @@ public class PlayerHealthManager : MonoBehaviour
 			OnHPChange(this, new EventArgs());
 	}
 
-	public string HPInformation { get { return "HP: " + HP + "/" + MaxHP; } }
+	public string HPInformation { get { return "HP: " + playerStats.HP + "/" + playerStats.MaxHP; } }
 }

@@ -2056,7 +2056,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 579a86efb21ed1d47874099f0858e82f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 1
   attackRange: 2
   attackWidth: 1
   DebugMode: 0
@@ -2109,8 +2108,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66d973b99c10da34db789b66d9353673, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHP: 5
-  HP: 5
 --- !u!114 &114505602189854588
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2157,7 +2154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxWokeness: 100
-  Wokeness: 99.25
+  Wokeness: 100
   WokenessDecreasePerWorldMinute: 0.25
   WokenessIndicatorThreshold: 20
   StatDecreaseThreshold: 20
@@ -2187,7 +2184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHunger: 100
-  Hunger: 99.25
+  Hunger: 100
   HungerDecreasePerWorldMinute: 0.25
   HungerIndicatorThreshold: 40
   StatDecreaseThreshold: 20

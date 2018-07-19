@@ -575,7 +575,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f083c0bbf0e18747be5577a19c18e43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 1
+  attackDamage: 5
   attackRange: 1.5
   attackWidth: 0.5
   DebugMode: 0
@@ -590,7 +590,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be5a313aafc43474c80f886809034abd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 3
+  Health: 25
 --- !u!136 &136813406529681050
 CapsuleCollider:
   m_ObjectHideFlags: 1

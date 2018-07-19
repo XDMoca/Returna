@@ -1,17 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class AttackManager : MonoBehaviour {
 
-    [SerializeField]
-    private int attackDamage;
+	private CharacterStats playerStats;
+	
     [SerializeField]
     private float attackRange;
     [SerializeField]
     private float attackWidth;
     [SerializeField]
     private bool DebugMode;
+
+	void Awake()
+	{
+		playerStats = AssetLoadHelper.GetPlayerStats();
+	}
 
     public void AttackCast()
     {
@@ -23,7 +26,7 @@ public class AttackManager : MonoBehaviour {
         {
             foreach(RaycastHit hit in hits)
             {
-                hit.collider.gameObject.GetComponent<EnemyDamageReceiver>().ReceiveDamage(attackDamage);
+                hit.collider.gameObject.GetComponent<EnemyDamageReceiver>().ReceiveDamage(playerStats.Attack);
             }
         }
     }
