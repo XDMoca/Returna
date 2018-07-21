@@ -58,11 +58,13 @@ public class FreeMovementState : IPlayerState {
         }
         if (inputs.attackPressed && stateManager.animationFlags.CanTransitionToNextAttack)
         {
-            return stateManager.states.Attack;
+			stateManager.animator.SetBool("Walking", false);
+			return stateManager.states.Attack;
         }
         if (inputs.blockPressed)
         {
-            return stateManager.states.Block;
+			stateManager.animator.SetBool("Walking", false);
+			return stateManager.states.Block;
         }
 
         return this;

@@ -7,7 +7,6 @@ public class StatusIndicator : MonoBehaviour {
 	private new Transform camera;
 	private Animator animator;
 	private SpriteRenderer sprite;
-	private PlayerStatusManager playerStatus;
 	private EStatus currentStatus;
 
 	[HideInInspector]
@@ -22,7 +21,6 @@ public class StatusIndicator : MonoBehaviour {
 		sprite = GetComponent<SpriteRenderer>();
 		animator = GetComponent<Animator>();
 		camera = Camera.main.transform;
-		playerStatus = player.GetComponent<PlayerStatusManager>();
 		Hide();
 	}
 
