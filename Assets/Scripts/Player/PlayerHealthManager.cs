@@ -36,7 +36,11 @@ public class PlayerHealthManager : MonoBehaviour
 
 	public void TakeCombatDamage(int damage)
 	{
-		if(!stateManager.IsBlocking)
+		if (stateManager.IsBlocking)
+		{
+			damage = DamageCalculator.ApplyDefense(damage, playerStats.Defense);
+		}
+
 		TakeHPDamage(damage);
 	}
 
