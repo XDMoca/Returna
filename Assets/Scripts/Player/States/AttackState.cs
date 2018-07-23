@@ -56,6 +56,7 @@ public class AttackState : IPlayerState
 
         ++currentAttackCounter;
         currentTimeInAttackAnimation = 0;
+		stateManager.soundPlayer.PlaySwordSwing();
     }
 
     public void StateEntered(PlayerStateManager stateManager)

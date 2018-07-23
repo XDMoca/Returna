@@ -25,6 +25,8 @@ public class PlayerStateManager : MonoBehaviour
 	public LockOnManager lockOnManager;
 	[HideInInspector]
 	public InteractionManager interactionManager;
+	[HideInInspector]
+	public SoundPlayer soundPlayer;
 
 	void Start()
 	{
@@ -36,6 +38,7 @@ public class PlayerStateManager : MonoBehaviour
 		lockOnManager = GetComponent<LockOnManager>();
 		interactionManager = GetComponent<InteractionManager>();
 		rigidbody = GetComponent<Rigidbody>();
+		soundPlayer = GetComponent<SoundPlayer>();
 		cameraTransform = Camera.main.transform;
 	}
 

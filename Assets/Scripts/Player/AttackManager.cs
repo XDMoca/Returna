@@ -3,6 +3,7 @@
 public class AttackManager : MonoBehaviour {
 
 	private CharacterStats playerStats;
+	private SoundPlayer soundPlayer;
 	
     [SerializeField]
     private float attackRange;
@@ -14,6 +15,7 @@ public class AttackManager : MonoBehaviour {
 	void Awake()
 	{
 		playerStats = AssetLoadHelper.GetPlayerStats();
+		soundPlayer = GetComponent<SoundPlayer>();
 	}
 
     public void AttackCast()
@@ -24,6 +26,7 @@ public class AttackManager : MonoBehaviour {
         RaycastHit[] hits = Physics.BoxCastAll(transform.position, new Vector3(attackWidth, 1, 0), transform.forward, transform.rotation, attackRange, LayerMask.GetMask(Constants.Layers.Enemy));
         if (hits.Length > 0)
         {
+			soundPlayer.PlaySwordHit();
             foreach(RaycastHit hit in hits)
             {
                 hit.collider.gameObject.GetComponent<EnemyDamageReceiver>().ReceiveDamage(playerStats.Attack);
