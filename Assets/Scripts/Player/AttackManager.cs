@@ -1,9 +1,11 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class AttackManager : MonoBehaviour {
 
 	private CharacterStats playerStats;
 	private SoundPlayer soundPlayer;
+	private HitStopManager hitStop;
 	
     [SerializeField]
     private float attackRange;
@@ -16,6 +18,7 @@ public class AttackManager : MonoBehaviour {
 	{
 		playerStats = AssetLoadHelper.GetPlayerStats();
 		soundPlayer = GetComponent<SoundPlayer>();
+		hitStop = GameObject.FindObjectOfType<HitStopManager>();
 	}
 
     public void AttackCast()
@@ -31,6 +34,7 @@ public class AttackManager : MonoBehaviour {
             {
                 hit.collider.gameObject.GetComponent<EnemyDamageReceiver>().ReceiveDamage(playerStats.Attack);
             }
+			hitStop.HitStop();
         }
     }
 }
