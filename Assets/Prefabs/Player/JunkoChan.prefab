@@ -230,6 +230,7 @@ GameObject:
   - component: {fileID: 114451423113483276}
   - component: {fileID: 82342971269880184}
   - component: {fileID: 114100984894055582}
+  - component: {fileID: 114781101852760884}
   m_Layer: 11
   m_Name: JunkoChan
   m_TagString: Player
@@ -2284,6 +2285,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statusIndicatorPrefab: {fileID: 1163824604250226, guid: 1c30846ce10a51943addbd250508b720,
     type: 2}
+--- !u!114 &114781101852760884
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1188808853138236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32928fa1a0fbf474fbb7ac1cc68d13a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentLevel: 1
+  MaxLevel: 2
+  CurrentExp: 0
+  ExpToNextLevel: 10
 --- !u!114 &114791031102335772
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -2,32 +2,39 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyDamageReceiver : MonoBehaviour {
+public class EnemyDamageReceiver : MonoBehaviour
+{
 
-    [SerializeField]
-    private int Health;
-    private Animator animator;
+	[SerializeField]
+	private int Health;
+	[SerializeField]
+	private int ExperienceGiven;
 
-    private void Start()
-    {
-        animator = GetComponent<Animator>();
-    }
+	private Animator animator;
+	private PlayerLevelManager playerLevel;
 
-    public void ReceiveDamage(int damageReceived)
-    {
-        if (Health <= 0)
-            return;
+	private void Start()
+	{
+		animator = GetComponent<Animator>();
+		playerLevel = GameObject.FindGameObjectWithTag(Constants.Tags.Player).GetComponent<PlayerLevelManager>();
+	}
 
-        Health -= damageReceived;
-        if (Health <= 0)
-        {
-            Die();
-        }
-    }
+	public void ReceiveDamage(int damageReceived)
+	{
+		if (Health <= 0)
+			return;
 
-    private void Die()
-    {
-        animator.SetTrigger("Die");
-        Destroy(gameObject, 1.5f);
-    }
+		Health -= damageReceived;
+		if (Health <= 0)
+		{
+			Die();
+		}
+	}
+
+	private void Die()
+	{
+		playerLevel.GainExp(ExperienceGiven);
+		animator.SetTrigger("Die");
+		Destroy(gameObject, 1.5f);
+	}
 }

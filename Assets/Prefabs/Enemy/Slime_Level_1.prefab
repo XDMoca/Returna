@@ -591,6 +591,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Health: 25
+  ExperienceGiven: 20
 --- !u!136 &136813406529681050
 CapsuleCollider:
   m_ObjectHideFlags: 1
