@@ -2297,9 +2297,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentLevel: 1
-  MaxLevel: 2
+  MaxLevel: 3
   CurrentExp: 0
-  ExpToNextLevel: 10
+  ExpToNextLevel: 15
 --- !u!114 &114791031102335772
 MonoBehaviour:
   m_ObjectHideFlags: 1

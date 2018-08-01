@@ -11,12 +11,12 @@ public class EnemyDamageReceiver : MonoBehaviour
 	private int ExperienceGiven;
 
 	private Animator animator;
-	private PlayerLevelManager playerLevel;
+	private PlayerExpManager playerExp;
 
 	private void Start()
 	{
 		animator = GetComponent<Animator>();
-		playerLevel = GameObject.FindGameObjectWithTag(Constants.Tags.Player).GetComponent<PlayerLevelManager>();
+		playerExp = GameObject.FindGameObjectWithTag(Constants.Tags.Player).GetComponent<PlayerExpManager>();
 	}
 
 	public void ReceiveDamage(int damageReceived)
@@ -33,7 +33,7 @@ public class EnemyDamageReceiver : MonoBehaviour
 
 	private void Die()
 	{
-		playerLevel.GainExp(ExperienceGiven);
+		playerExp.GainExp(ExperienceGiven);
 		animator.SetTrigger("Die");
 		Destroy(gameObject, 1.5f);
 	}
