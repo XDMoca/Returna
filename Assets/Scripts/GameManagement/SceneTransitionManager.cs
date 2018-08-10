@@ -1,50 +1,50 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneTransitionManager : MonoBehaviour {
+public class SceneTransitionManager : MonoBehaviour
+{
 
-    private Animator animator;
-    private GameObject player;
-    private string nextSceneName;
-    private ESpawnPointIdentifiers nextSceneSpawnPointIdentifier;
+	private Animator animator;
+	private GameObject player;
+	private string nextSceneName;
+	private ESpawnPointIdentifiers nextSceneSpawnPointIdentifier;
 
-    [SerializeField]
-    private GameObject playerPrefab;
+	[SerializeField]
+	private GameObject playerPrefab;
 
-    void Awake () {
-        animator = GetComponent<Animator>();
-        SceneManager.sceneLoaded += OnLevelLoaded;
+	void Awake()
+	{
+		animator = GetComponent<Animator>();
+		SceneManager.sceneLoaded += OnLevelLoaded;
 
-        if (player == null)
-        {
-            player = GameObject.Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
-            Camera.main.GetComponent<CameraControl>().player = player.transform;
-        }
-        DontDestroyOnLoad(player);
-        DontDestroyOnLoad(gameObject);
-        DontDestroyOnLoad(Camera.main.gameObject);
-    }
+		if (player == null)
+		{
+			player = GameObject.Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
+			Camera.main.GetComponent<CameraControl>().player = player.transform;
+		}
+		DontDestroyOnLoad(player);
+		DontDestroyOnLoad(gameObject);
+		DontDestroyOnLoad(Camera.main.gameObject);
+	}
 
 
-    public void StartSceneTransition(string NextAreaName, ESpawnPointIdentifiers NextAreaSpawnPointIdentifier)
-    {
-        nextSceneName = NextAreaName;
-        nextSceneSpawnPointIdentifier = NextAreaSpawnPointIdentifier;
-        animator.SetTrigger("FadeOut");
-    }
+	public void StartSceneTransition(string NextAreaName, ESpawnPointIdentifiers NextAreaSpawnPointIdentifier)
+	{
+		nextSceneName = NextAreaName;
+		nextSceneSpawnPointIdentifier = NextAreaSpawnPointIdentifier;
+		animator.SetTrigger("FadeOut");
+	}
 
-    private void LoadNextLevel()
-    {
-        SceneManager.LoadScene(nextSceneName);
-    }
+	private void LoadNextLevel()
+	{
+		SceneManager.LoadScene(nextSceneName);
+	}
 
-    public void OnLevelLoaded(Scene scene, LoadSceneMode loadSceneMode)
-    {
-        AreaSpawnPoint spawnPoint = FindObjectsOfType<AreaSpawnPoint>().Where(sP => sP.Identifier == nextSceneSpawnPointIdentifier).FirstOrDefault();
-        player.transform.position = spawnPoint.transform.position;
-        animator.SetTrigger("FadeIn");
-    }
+	public void OnLevelLoaded(Scene scene, LoadSceneMode loadSceneMode)
+	{
+		AreaSpawnPoint spawnPoint = FindObjectsOfType<AreaSpawnPoint>().Where(sP => sP.Identifier == nextSceneSpawnPointIdentifier).FirstOrDefault();
+		player.transform.position = spawnPoint.transform.position;
+		animator.SetTrigger("FadeIn");
+	}
 }

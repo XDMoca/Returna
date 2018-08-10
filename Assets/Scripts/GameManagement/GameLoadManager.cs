@@ -16,8 +16,8 @@ public class GameLoadManager : MonoBehaviour {
             GameObject.Instantiate(CameraPrefab);
         }
         if (gameManager == null)
-        {
-            GameObject.Instantiate(GameManagerPrefab);
+		{
+			GameObject.Instantiate(GameManagerPrefab);
         }
 	}
 }

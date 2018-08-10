@@ -1,109 +1,98 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class TimeManager : MonoBehaviour {
+public class TimeManager : MonoBehaviour
+{
 
-    public DateTime worldTime;
+	public DateTime worldTime;
 
-    [SerializeField]
-    private float lightChangeDamp;
-    [SerializeField]
-    private float secondsPerMinute;
-    [SerializeField]
-    private int lightChangeTime;
+	[SerializeField]
+	private float lightChangeDamp;
+	[SerializeField]
+	private float secondsPerMinute;
+	[SerializeField]
+	private int lightChangeTime;
 
-    [SerializeField]
-    private Color dayColor;
-    [SerializeField]
-    private Color nightColor;
-    private Color targetColor;
+	[SerializeField]
+	private Color dayColor;
+	[SerializeField]
+	private Color nightColor;
+	private Color targetColor;
 
-    private new Light light;
+	private new Light light;
 	private Animator animator;
-
-	private ITickable[] tickables;
 
 	[SerializeField]
 	private int SleepHours;
 
 	public event EventHandler OnTick;
-    
 
-    void Start () {
+
+	void Start()
+	{
 		animator = GetComponent<Animator>();
-        worldTime = new DateTime(1, 1, 1, 6, 50, 0);
+		worldTime = new DateTime(1, 1, 1, 6, 50, 0);
 		FireTickEvent();
 		SetupLightReference();
-        targetColor = dayColor;
-		tickables = GameObject.FindGameObjectWithTag(Constants.Tags.Player).GetComponents<ITickable>();
-        SceneManager.sceneLoaded += OnLevelLoaded;
-        StartCoroutine(Tick());
+		targetColor = dayColor;
+		SceneManager.sceneLoaded += OnLevelLoaded;
+		StartCoroutine(Tick());
 	}
-	
-	void Update ()
-    {
-        SetTargetColor();
-        UpdateLightColor();
-    }
 
-    private IEnumerator Tick()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(secondsPerMinute);
-            IncrementTime();
-			AdvanceTimeForAllTickableObjects();
-			FireTickEvent();
-        }
-    }
-
-    private void IncrementTime()
-    {
-        worldTime = worldTime.AddMinutes(1);
-		setDayToZero();
-    }
-
-    private void SetTargetColor()
-    {
-        if (worldTime.Hour < lightChangeTime || worldTime.Hour >= lightChangeTime + 12)
-        {
-            targetColor = nightColor;
-        }
-        else
-        {
-            targetColor = dayColor;
-        }
-    }
-
-    private void UpdateLightColor()
-    {
-        if (light == null)
-            return;
-
-        light.color = Color.Lerp(light.color, targetColor, lightChangeDamp);
-    }
-
-    private void SetupLightReference()
-    {
-        light = GameObject.FindGameObjectWithTag(Constants.Tags.AreaLight).GetComponent<Light>();
-		setLightColorInstantly();
-    }
-
-	private void AdvanceTimeForAllTickableObjects()
+	void Update()
 	{
-		foreach (ITickable tickable in tickables)
+		SetTargetColor();
+		UpdateLightColor();
+	}
+
+	private IEnumerator Tick()
+	{
+		while (true)
 		{
-			tickable.Tick();
+			yield return new WaitForSeconds(secondsPerMinute);
+			IncrementTime();
+			FireTickEvent();
 		}
 	}
 
-    public void OnLevelLoaded(Scene scene, LoadSceneMode loadSceneMode)
-    {
-        SetupLightReference();
-    }
+	private void IncrementTime()
+	{
+		worldTime = worldTime.AddMinutes(1);
+		setDayToZero();
+	}
+
+	private void SetTargetColor()
+	{
+		if (worldTime.Hour < lightChangeTime || worldTime.Hour >= lightChangeTime + 12)
+		{
+			targetColor = nightColor;
+		}
+		else
+		{
+			targetColor = dayColor;
+		}
+	}
+
+	private void UpdateLightColor()
+	{
+		if (light == null)
+			return;
+
+		light.color = Color.Lerp(light.color, targetColor, lightChangeDamp);
+	}
+
+	private void SetupLightReference()
+	{
+		light = GameObject.FindGameObjectWithTag(Constants.Tags.AreaLight).GetComponent<Light>();
+		setLightColorInstantly();
+	}
+
+	public void OnLevelLoaded(Scene scene, LoadSceneMode loadSceneMode)
+	{
+		SetupLightReference();
+	}
 
 	public void StartSleep()
 	{
