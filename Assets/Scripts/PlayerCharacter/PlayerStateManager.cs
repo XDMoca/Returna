@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PlayerStateManager : MonoBehaviour
+public class PlayerStateManager : AStateMachine
 {
 
 	[HideInInspector]
@@ -11,7 +11,6 @@ public class PlayerStateManager : MonoBehaviour
 	public new Rigidbody rigidbody;
 
 	public PlayerStatesContainer states;
-	IPlayerState currentState;
 
 	[HideInInspector]
 	public Animator animator;
@@ -23,23 +22,13 @@ public class PlayerStateManager : MonoBehaviour
 	void Start()
 	{
 		inputManager = GetComponent<InputManager>();
-		currentState = states.FreeMovement;
 		animator = GetComponent<Animator>();
 		interactionManager = GetComponent<InteractionManager>();
 		rigidbody = GetComponent<Rigidbody>();
 		soundPlayer = GetComponent<SoundPlayer>();
 		cameraTransform = Camera.main.transform;
-	}
-
-	void FixedUpdate()
-	{
-		IPlayerState newState = currentState.CheckTransition(this);
-		if (currentState != newState)
-		{
-			currentState = newState;
-			currentState.StateEntered(this);
-		}
-		currentState.StateUpdate(this);
-		currentState.AnimatorUpdate(this);
+		
+		currentState = states.FreeMovement;
+		currentState.SetupStateManagerReference(this);
 	}
 }

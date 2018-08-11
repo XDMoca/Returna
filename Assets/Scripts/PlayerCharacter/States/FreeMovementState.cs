@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [System.Serializable]
-public class FreeMovementState : IPlayerState
+public class FreeMovementState : AState<PlayerStateManager>
 {
 
 	[SerializeField]
@@ -9,8 +9,9 @@ public class FreeMovementState : IPlayerState
 	[SerializeField]
 	private float rotationDampSpeed;
 
-	public void StateUpdate(PlayerStateManager stateManager)
+	public override void StateUpdate()
 	{
+		Debug.Log("state update");
 		InputsContainer inputs = stateManager.inputManager.inputsContainer;
 		Transform transform = stateManager.transform;
 
@@ -30,7 +31,7 @@ public class FreeMovementState : IPlayerState
 
 	}
 
-	public IPlayerState CheckTransition(PlayerStateManager stateManager)
+	public override IState CheckTransition()
 	{
 		InputsContainer inputs = stateManager.inputManager.inputsContainer;
 		if (inputs.interactPressed && stateManager.interactionManager.InteractionTargetInRange)
@@ -42,13 +43,17 @@ public class FreeMovementState : IPlayerState
 		return this;
 	}
 
-	public void AnimatorUpdate(PlayerStateManager stateManager)
+	public override void AnimatorUpdate()
 	{
 		bool walking = stateManager.inputManager.inputsContainer.HorizontalMovementInput != 0 || stateManager.inputManager.inputsContainer.VerticalMovementInput != 0;
 		stateManager.animator.SetBool("Walking", walking);
 	}
 
-	public void StateEntered(PlayerStateManager stateManager)
+	public override void EnterState()
+	{
+	}
+
+	public override void ExitState()
 	{
 	}
 }

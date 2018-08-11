@@ -1,12 +1,11 @@
 ﻿[System.Serializable]
-public class InteractState : IPlayerState
+public class InteractState : AState<PlayerStateManager>
 {
-	public void AnimatorUpdate(PlayerStateManager stateManager)
+	public override void AnimatorUpdate()
 	{
-
 	}
 
-	public IPlayerState CheckTransition(PlayerStateManager stateManager)
+	public override IState CheckTransition()
 	{
 		if (!stateManager.interactionManager.Interacting)
 		{
@@ -15,13 +14,17 @@ public class InteractState : IPlayerState
 		return this;
 	}
 
-	public void StateEntered(PlayerStateManager stateManager)
+	public override void EnterState()
 	{
-
 	}
 
-	public void StateUpdate(PlayerStateManager stateManager)
+	public override void ExitState()
 	{
+	}
+
+	public override void StateUpdate()
+	{
+
 		if (stateManager.inputManager.inputsContainer.interactPressed)
 		{
 			stateManager.interactionManager.Interact();
