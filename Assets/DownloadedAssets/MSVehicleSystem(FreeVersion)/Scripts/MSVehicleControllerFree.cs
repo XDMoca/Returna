@@ -477,12 +477,13 @@ public class MSVehicleControllerFree : MonoBehaviour {
 	[HideInInspector] 
 	public bool isInsideTheCar;
 
-	MSSceneControllerFree controls;
-
 	void Awake(){
 		enableSkidMarksOnStart = true;
 		DebugStartErrors ();
 		SetCameras ();
+
+		theEngineIsRunning = true;
+		isInsideTheCar = true;
 	}
 
 	void DebugStartErrors(){
@@ -490,21 +491,8 @@ public class MSVehicleControllerFree : MonoBehaviour {
 			this.transform.gameObject.SetActive (false);
 			return;
 		}
-		controls = GameObject.FindObjectOfType (typeof(MSSceneControllerFree))as MSSceneControllerFree;
-		if (!controls) {
-			Debug.LogError ("There must be an object with the 'MSSceneController' component so that vehicles can be managed.");
-			this.transform.gameObject.SetActive (false);
-			return;
-		}
 		//
-		bool isOnTheList = false;
-		for (int x = 0; x < controls.vehicles.Length; x++) {
-			if (controls.vehicles [x]) {
-				if (controls.vehicles [x].gameObject == this.gameObject) {
-					isOnTheList = true;
-				}
-			}
-		}
+		bool isOnTheList = true;
 		if (!isOnTheList) {
 			Debug.LogError ("This vehicle can not be controlled because it is not associated with the vehicle list of the scene controller (object that has the 'MSSceneController' component).");
 			this.transform.gameObject.SetActive (false);
@@ -771,27 +759,27 @@ public class MSVehicleControllerFree : MonoBehaviour {
 	}
 
 	void InputsCameras(){
-		if (isInsideTheCar && controls.controls.enable_switchingCameras_Input) {
-			if (Input.GetKeyDown (controls.controls.switchingCameras) && indexCamera < (_cameras.cameras.Length - 1)) {
-				indexCamera++;
-				EnableCameras (indexCamera);
-			} else if (Input.GetKeyDown (controls.controls.switchingCameras) && indexCamera >= (_cameras.cameras.Length - 1)) {
-				indexCamera = 0;
-				EnableCameras (indexCamera);
-			}
-		}
+		//if (isInsideTheCar && controls.controls.enable_switchingCameras_Input) {
+		//	if (Input.GetKeyDown (controls.controls.switchingCameras) && indexCamera < (_cameras.cameras.Length - 1)) {
+		//		indexCamera++;
+		//		EnableCameras (indexCamera);
+		//	} else if (Input.GetKeyDown (controls.controls.switchingCameras) && indexCamera >= (_cameras.cameras.Length - 1)) {
+		//		indexCamera = 0;
+		//		EnableCameras (indexCamera);
+		//	}
+		//}
 	}
 
 	public void InputsCamerasMobile(){
-		if (isInsideTheCar && controls.controls.enable_switchingCameras_Input) {
-			if (indexCamera < (_cameras.cameras.Length - 1)) {
-				indexCamera++;
-				EnableCameras (indexCamera);
-			} else if (indexCamera >= (_cameras.cameras.Length - 1)) {
-				indexCamera = 0;
-				EnableCameras (indexCamera);
-			}
-		}
+		//if (isInsideTheCar && controls.controls.enable_switchingCameras_Input) {
+		//	if (indexCamera < (_cameras.cameras.Length - 1)) {
+		//		indexCamera++;
+		//		EnableCameras (indexCamera);
+		//	} else if (indexCamera >= (_cameras.cameras.Length - 1)) {
+		//		indexCamera = 0;
+		//		EnableCameras (indexCamera);
+		//	}
+		//}
 	}
 
 	void CamerasManager(){
@@ -846,7 +834,7 @@ public class MSVehicleControllerFree : MonoBehaviour {
 			break;
 		case CameraTypeClassFree.TipoRotac.Orbital:
 			minDistanceOrbitalCamera = _cameras.cameraSettings.orbitalCamera.minDistance;
-			if (_cameras.cameraSettings.orbitalCamera.invertRotationJoystick && (controls.selectControls == MSSceneControllerFree.ControlTypeFree.mobileButton)) {
+			if (_cameras.cameraSettings.orbitalCamera.invertRotationJoystick && (false/*controls.selectControls == MSSceneControllerFree.ControlTypeFree.mobileButton*/)) {
 				camerasMovX = -mouseXInput;
 				camerasMovY = -mouseYInput;
 				camerasMovZ = mouseScrollWheelInput;
@@ -876,7 +864,7 @@ public class MSVehicleControllerFree : MonoBehaviour {
 			_cameras.cameras [indexCamera]._camera.transform.position = Vector3.Lerp(currentPositionCameras,positionCameras,Time.deltaTime*5.0f*timeScaleSpeed);
 			break;
 		case CameraTypeClassFree.TipoRotac.OrbitalThatFollows:
-			if (_cameras.cameraSettings.orbitalCamera.invertRotationJoystick && (controls.selectControls == MSSceneControllerFree.ControlTypeFree.mobileButton)) {
+			if (_cameras.cameraSettings.orbitalCamera.invertRotationJoystick && (false/*controls.selectControls == MSSceneControllerFree.ControlTypeFree.mobileButton*/)) {
 				camerasMovX = -mouseXInput;
 				camerasMovY = -mouseYInput;
 				camerasMovZ = mouseScrollWheelInput;
@@ -970,17 +958,16 @@ public class MSVehicleControllerFree : MonoBehaviour {
 	}
 
 	void Update(){
-
 		wheelFDIsGrounded = _wheels.rightFrontWheel.wheelCollider.isGrounded;
 		wheelFEIsGrounded = _wheels.leftFrontWheel.wheelCollider.isGrounded;
 		wheelTDIsGrounded = _wheels.rightRearWheel.wheelCollider.isGrounded;
 		wheelTEIsGrounded = _wheels.leftRearWheel.wheelCollider.isGrounded;
 
-		verticalInput = controls.verticalInput;
-		horizontalInput = controls.horizontalInput;
-		mouseXInput = controls.mouseXInput;
-		mouseYInput = controls.mouseYInput;
-		mouseScrollWheelInput = controls.mouseScrollWheelInput;
+		verticalInput = Input.GetAxisRaw("Vertical");
+		horizontalInput = Input.GetAxisRaw("Horizontal");
+		mouseXInput = 0;// controls.mouseXInput;
+		mouseYInput = 0;//controls.mouseYInput;
+		mouseScrollWheelInput = 0;//controls.mouseScrollWheelInput;
 
 		KMh = ms_Rigidbody.velocity.magnitude * 3.6f;
 		inclinationFactorForcesDown = Mathf.Clamp(Mathf.Abs(Vector3.Dot (Vector3.up, transform.up)),_vehicleSettings._aerodynamics.downForceAngleFactor,1.0f);
@@ -1001,7 +988,7 @@ public class MSVehicleControllerFree : MonoBehaviour {
 			engineInput = 0;
 		}
 		if (isInsideTheCar) {
-			if (Input.GetKeyDown (controls.controls.handBrakeInput) && controls.controls.enable_handBrakeInput_Input && Time.timeScale > 0.2f) {
+			if (Input.GetKeyDown (KeyCode.E) && true/*controls.controls.enable_handBrakeInput_Input*/ && Time.timeScale > 0.2f) {
 				handBrakeTrue = !handBrakeTrue;
 			}
 		}
@@ -1548,8 +1535,8 @@ public class MSVehicleControllerFree : MonoBehaviour {
 
 	#region CoroutineStartEndTurnOff
 	void TurnOnAndTurnOff(){
-		if (youCanCall && isInsideTheCar && controls.controls.enable_startTheVehicle_Input) {
-			if ((Input.GetKeyDown (controls.controls.startTheVehicle) && !theEngineIsRunning) || (Mathf.Abs(verticalInput) > 0.5f && !theEngineIsRunning)) {
+		if (youCanCall && isInsideTheCar && true/*controls.controls.enable_startTheVehicle_Input*/) {
+			if ((Input.GetKeyDown (KeyCode.P/*controls.controls.startTheVehicle*/) && !theEngineIsRunning) || (Mathf.Abs(verticalInput) > 0.5f && !theEngineIsRunning)) {
 				enableEngineSound = true;
 				if (_sounds.engineSound) {
 					engineSoundAUD.pitch = 0.5f;
@@ -1557,7 +1544,7 @@ public class MSVehicleControllerFree : MonoBehaviour {
 				StartCoroutine ("StartEngineCoroutine", true);
 				StartCoroutine ("StartEngineTime");
 			}
-			if (Input.GetKeyDown (controls.controls.startTheVehicle) && theEngineIsRunning) {
+			if (Input.GetKeyDown (KeyCode.P/*controls.controls.startTheVehicle*/) && theEngineIsRunning) {
 				StartCoroutine ("StartEngineCoroutine", false);
 				StartCoroutine ("TurnOffEngineTime");
 			}
@@ -1648,7 +1635,7 @@ public class MSVehicleControllerFree : MonoBehaviour {
 		if (Mathf.Abs (verticalInput) < 0.1f && mediumRPM >= 0 && currentGear < 2) {
 			currentGear = 1;
 		}
-		if (controls.selectControls == MSSceneControllerFree.ControlTypeFree.windows) {//joystick OFF && buttons offf
+		if (true/*controls.selectControls == MSSceneControllerFree.ControlTypeFree.windows*/) {//joystick OFF && buttons offf
 			if ((Mathf.Abs (Mathf.Clamp (verticalInput, -1f, 0f))) > 0.8f) {
 				if ((KMh < 5 && mediumRPM < 1) || mediumRPM < -2) {
 					currentGear = -1;
@@ -1792,7 +1779,7 @@ public class MSVehicleControllerFree : MonoBehaviour {
 		if (currentBrakeValue > 0.1f) {
 			return 0;
 		}
-		if (Input.GetKey (controls.controls.handBrakeInput)&& controls.controls.enable_handBrakeInput_Input) {
+		if (Input.GetKey (KeyCode.E/*controls.controls.handBrakeInput*/)&& true/*controls.controls.enable_handBrakeInput_Input*/) {
 			return 0;
 		}
 		if (currentGear < 0) {
@@ -1887,7 +1874,8 @@ public class MSVehicleControllerFree : MonoBehaviour {
 		} else {
 			handBrake_Input = 0;
 		}
-		if (Input.GetKey (controls.controls.handBrakeInput) && controls.controls.enable_handBrakeInput_Input) {
+		if (Input.GetKey (KeyCode.E/*controls.controls.handBrakeInput*/) && true/*controls.controls.enable_handBrakeInput_Input*/)
+		{
 			handBrake_Input = 2;
 		}
 		handBrake_Input = handBrake_Input * 1000;
@@ -2108,7 +2096,7 @@ public class MSVehicleControllerFree : MonoBehaviour {
 		mesh.MarkDynamic();
 		rendRef.GetComponent<MeshRenderer>().material = skdMaterial;
 		rendRef.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
-		rendRef.transform.parent = controls.gameObject.transform;
+		//rendRef.transform.parent = controls.gameObject.transform;
 		return mesh;
 	}
 

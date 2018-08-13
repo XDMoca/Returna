@@ -11,8 +11,12 @@ public class CameraControl : MonoBehaviour {
     private float DistanceFromPlayer;
     [SerializeField]
     private float CameraAngle;
+	[SerializeField]
+	private bool CarCamera;
 
-    void Awake () {
+	void Awake () {
+		if (CarCamera)
+			player = GameObject.FindGameObjectWithTag(Constants.Tags.Player).transform;
 	}
 	
 	void LateUpdate () {
