@@ -6,6 +6,7 @@
 		public static readonly string Vertical = "Vertical";
 		public static readonly string Interact = "Interact";
 		public static readonly string Handbrake = "Handbrake";
+		public static readonly string Fire = "Fire";
 	}
 
 	public class Layers

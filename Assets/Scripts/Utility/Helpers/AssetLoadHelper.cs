@@ -1,9 +1,7 @@
-﻿using UnityEngine;
+﻿public class AssetLoadHelper {
 
-public class AssetLoadHelper {
-
-	public static CharacterStats GetPlayerStats()
-	{
-		return Resources.Load<CharacterStats>("GameDataObjects/CharacterStats/PlayerStats");
-	}
+	//public static CharacterStats GetPlayerStats()
+	//{
+	//	return Resources.Load<CharacterStats>("GameDataObjects/CharacterStats/PlayerStats");
+	//}
 }

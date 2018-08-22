@@ -221,7 +221,7 @@ public class MSVehicleControllerFree : MonoBehaviour
 	[Tooltip("In this variable, the 'SkidMarks' shader must be associated. Otherwise, the vehicle will not generate skid marks.")]
 	public Shader skidMarksShader;
 
-	PlayerVehicleInputManager inputs;
+	AVehicleInputManager inputs;
 
 	bool changinGearsAuto;
 	bool brakingAuto;
@@ -394,7 +394,7 @@ public class MSVehicleControllerFree : MonoBehaviour
 	{
 		enableSkidMarksOnStart = true;
 		DebugStartErrors();
-		inputs = GetComponent<PlayerVehicleInputManager>();
+		inputs = GetComponent<AVehicleInputManager>();
 	}
 
 	void DebugStartErrors()
@@ -574,7 +574,7 @@ public class MSVehicleControllerFree : MonoBehaviour
 			engineInput = 0;
 		}
 
-		if (Input.GetKeyDown(KeyCode.E) && Time.timeScale > 0.2f)
+		if (inputs.handbrakePressed && Time.timeScale > 0.2f)
 		{
 			handBrakeTrue = !handBrakeTrue;
 		}
@@ -1430,7 +1430,7 @@ public class MSVehicleControllerFree : MonoBehaviour
 		{
 			return 0;
 		}
-		if (Input.GetKey(KeyCode.E/*controls.controls.handBrakeInput*/) && true/*controls.controls.enable_handBrakeInput_Input*/)
+		if (inputs.handbrakePressed)
 		{
 			return 0;
 		}
@@ -1543,7 +1543,7 @@ public class MSVehicleControllerFree : MonoBehaviour
 		{
 			handBrake_Input = 0;
 		}
-		if (Input.GetKey(KeyCode.E/*controls.controls.handBrakeInput*/) && true/*controls.controls.enable_handBrakeInput_Input*/)
+		if (inputs.handbrakePressed)
 		{
 			handBrake_Input = 2;
 		}
