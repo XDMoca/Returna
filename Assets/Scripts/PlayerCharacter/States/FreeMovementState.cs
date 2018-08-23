@@ -11,7 +11,6 @@ public class FreeMovementState : AState<PlayerStateManager>
 
 	public override void StateUpdate()
 	{
-		Debug.Log("state update");
 		InputsContainer inputs = stateManager.inputManager.inputsContainer;
 		Transform transform = stateManager.transform;
 

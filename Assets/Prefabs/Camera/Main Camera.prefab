@@ -97,5 +97,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  DistanceFromPlayer: 8
+  DistanceFromPlayer: 6
   CameraAngle: -45
+  CarCamera: 0

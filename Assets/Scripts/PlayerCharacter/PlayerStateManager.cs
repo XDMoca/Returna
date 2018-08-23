@@ -1,5 +1,10 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(InputManager))]
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(InteractionManager))]
+[RequireComponent(typeof(SoundPlayer))]
+[RequireComponent(typeof(CapsuleCollider))]
 public class PlayerStateManager : AStateMachine
 {
 
@@ -27,7 +32,7 @@ public class PlayerStateManager : AStateMachine
 		rigidbody = GetComponent<Rigidbody>();
 		soundPlayer = GetComponent<SoundPlayer>();
 		cameraTransform = Camera.main.transform;
-		
+
 		currentState = states.FreeMovement;
 		currentState.SetupStateManagerReference(this);
 	}
