@@ -1,24 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class InteractableDoor : MonoBehaviour, IInteractable {
+public class InteractableDoor : MonoBehaviour, IInteractable
+{
+	public string NextAreaName;
 
-    [SerializeField]
-    private string NextAreaName;
-    [SerializeField]
-    private ESpawnPointIdentifiers NextAreaSpawnPointIdentifier;
-
-    private SceneTransitionManager sceneTransitionManager;
-
-
-
-    void Start () {
-        sceneTransitionManager = GameObject.FindObjectOfType<SceneTransitionManager>();
-	}
-
-    public void GoToNextArea()
-    {
-        sceneTransitionManager.StartSceneTransition(NextAreaName, NextAreaSpawnPointIdentifier);
-    }
+	public ESpawnPointIdentifiers NextAreaSpawnPointIdentifier;
 }

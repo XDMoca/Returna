@@ -1,59 +1,59 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class InteractionIndicator : MonoBehaviour {
+public class InteractionIndicator : MonoBehaviour
+{
 
-    private new Transform camera;
-    private Animator animator;
-    private SpriteRenderer sprite;
-    [HideInInspector]
-    public Transform player;
+	private new Transform camera;
+	private Animator animator;
+	private SpriteRenderer sprite;
+	[HideInInspector]
+	public Transform player;
 
-    [SerializeField]
-    private Vector3 offsetFromPlayer;
+	[SerializeField]
+	private Vector3 offsetFromPlayer;
 
-    void Start () {
-        DontDestroyOnLoad(gameObject);
-        sprite = GetComponent<SpriteRenderer>();
-        animator = GetComponent<Animator>();
-        camera = Camera.main.transform;
-        Hide();
-	}
-	
-	void Update () {
-        transform.rotation = camera.rotation;
-        transform.position = player.position + offsetFromPlayer;
+	void Start()
+	{
+		sprite = GetComponent<SpriteRenderer>();
+		animator = GetComponent<Animator>();
+		camera = Camera.main.transform;
+		Hide();
 	}
 
-    public void Hide()
-    {
-        if (sprite == null || !sprite.enabled)
-            return;
-        sprite.enabled = false;
-        animator.SetBool("Speak", false);
-        animator.SetBool("Go", false);
-    }
+	void Update()
+	{
+		transform.rotation = camera.rotation;
+		transform.position = player.position + offsetFromPlayer;
+	}
 
-    public void Show(IInteractable interactionTarget)
-    {
-        if (sprite == null || sprite.enabled)
-            return;
-        sprite.enabled = true;
-        animator.SetTrigger("Appear");
-        SetInteractionType(interactionTarget);
-    }
+	public void Hide()
+	{
+		if (sprite == null || !sprite.enabled)
+			return;
+		sprite.enabled = false;
+		animator.SetBool("Speak", false);
+		animator.SetBool("Go", false);
+	}
 
-    private void SetInteractionType(IInteractable interactionTarget)
-    {
-        if (interactionTarget is InteractableEntity)
-        {
-           animator.SetBool("Speak", true);
-        }
+	public void Show(IInteractable interactionTarget)
+	{
+		if (sprite == null || sprite.enabled)
+			return;
+		sprite.enabled = true;
+		animator.SetTrigger("Appear");
+		SetInteractionType(interactionTarget);
+	}
 
-        else if (interactionTarget is InteractableDoor)
-        {
-            animator.SetBool("Go", true);
-        }
-    }
+	private void SetInteractionType(IInteractable interactionTarget)
+	{
+		if (interactionTarget is InteractableEntity)
+		{
+			animator.SetBool("Speak", true);
+		}
+
+		else if (interactionTarget is InteractableDoor)
+		{
+			animator.SetBool("Go", true);
+		}
+	}
 }

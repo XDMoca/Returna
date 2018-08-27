@@ -1506,6 +1506,7 @@ MonoBehaviour:
   - Hi there! I'm Query-chan!
   - I'm gonna show you how this game works.
   - Keep up, motherfucker.
+  Vehicle: {fileID: 1913397928330842, guid: 75ace3ce334cab54b968cbfdf42b919a, type: 2}
 --- !u!136 &2051711417
 CapsuleCollider:
   m_ObjectHideFlags: 0

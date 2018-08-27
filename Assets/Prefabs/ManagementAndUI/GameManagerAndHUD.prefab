@@ -93,6 +93,7 @@ GameObject:
   - component: {fileID: 114452379732551926}
   - component: {fileID: 95277391146530992}
   - component: {fileID: 114316952114992820}
+  - component: {fileID: 114877236806025564}
   m_Layer: 5
   m_Name: GameManagerAndHUD
   m_TagString: GameController
@@ -251,6 +252,19 @@ MonoBehaviour:
   m_Text: 'Player
 
 '
+--- !u!114 &114877236806025564
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1646444355001756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36027ebea9da6ea438aeb3010dbfc056, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerVehicle: {fileID: 1782384805024110, guid: 5a41e0e8f058d184093c25c636fdbb56,
+    type: 2}
 --- !u!114 &114880105376339276
 MonoBehaviour:
   m_ObjectHideFlags: 1

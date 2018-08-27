@@ -14,9 +14,11 @@ public class CameraControl : MonoBehaviour {
 	[SerializeField]
 	private bool CarCamera;
 
-	void Awake () {
+	void Start () {
 		if (CarCamera)
-			player = GameObject.FindGameObjectWithTag(Constants.Tags.Player).transform;
+		{
+			player = GameObject.FindGameObjectWithTag(Constants.Tags.PlayerVehicle).transform;
+		}
 	}
 	
 	void LateUpdate () {

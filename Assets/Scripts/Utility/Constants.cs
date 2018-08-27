@@ -19,7 +19,9 @@
 	public class Tags
 	{
 		public static readonly string Player = "Player";
+		public static readonly string PlayerVehicle = "PlayerVehicle";
 		public static readonly string GameController = "GameController";
 		public static readonly string AreaLight = "AreaLight";
+		public static readonly string VehicleSpawnPoint = "VehicleSpawnPoint";
 	}
 }

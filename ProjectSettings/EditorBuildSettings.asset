@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ForestScene.unity
     guid: b7c9ede38017b4e45b7fcb6e721b3041
+  - enabled: 1
+    path: Assets/Scenes/Arenas/BasicArena.unity
+    guid: 4346b66b1702638428cd539650e4dfda
   m_configObjects: {}
