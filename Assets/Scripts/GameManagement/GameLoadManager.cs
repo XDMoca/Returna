@@ -8,13 +8,17 @@ public class GameLoadManager : MonoBehaviour
 	[SerializeField]
 	private GameObject CameraPrefab;
 
-	void Start()
+	private void Awake()
 	{
-		GameObject gameManager = GameObject.FindGameObjectWithTag(Constants.Tags.GameController);
 		if (Camera.main == null)
 		{
 			Instantiate(CameraPrefab);
 		}
+	}
+
+	void Start()
+	{
+		GameObject gameManager = GameObject.FindGameObjectWithTag(Constants.Tags.GameController);
 		if (gameManager == null)
 		{
 			Instantiate(GameManagerPrefab);

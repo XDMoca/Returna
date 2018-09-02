@@ -7,10 +7,10 @@ public class SceneTransitionManager : MonoBehaviour
 
 	private Animator animator;
 	private GameObject player;
-	private string nextSceneName;
+	private string worldSceneName = "Scenes/TownScene";
 	private ESpawnPointIdentifiers nextSceneSpawnPointIdentifier;
 	private ESceneType currentSceneType;
-	private BattleSetupManager battleSetup;
+	private BattleManager battleManager;
 
 	[SerializeField]
 	private GameObject playerPrefab;
@@ -19,14 +19,15 @@ public class SceneTransitionManager : MonoBehaviour
 	{
 		currentSceneType = ESceneType.Town;
 		animator = GetComponent<Animator>();
-		battleSetup = GetComponent<BattleSetupManager>();
+		battleManager = GetComponent<BattleManager>();
 		SceneManager.sceneLoaded += OnLevelLoaded;
 
 		if (player == null)
 		{
 			player = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
-			Camera.main.GetComponent<CameraControl>().player = player.transform;
+			BindCameraToPlayer();
 		}
+		animator.SetTrigger("FadeIn");
 		DontDestroyOnLoad(player);
 		DontDestroyOnLoad(gameObject);
 	}
@@ -34,14 +35,14 @@ public class SceneTransitionManager : MonoBehaviour
 	public void GoToNextArea(string NextAreaName, ESpawnPointIdentifiers NextAreaSpawnPointIdentifier)
 	{
 		currentSceneType = ESceneType.Town;
-		nextSceneName = NextAreaName;
+		worldSceneName = NextAreaName;
 		nextSceneSpawnPointIdentifier = NextAreaSpawnPointIdentifier;
 		animator.SetTrigger("FadeOut");
 	}
 
 	private void LoadNextLevel()
 	{
-		SceneManager.LoadScene(nextSceneName);
+		SceneManager.LoadScene(worldSceneName);
 	}
 
 	public void OnLevelLoaded(Scene scene, LoadSceneMode loadSceneMode)
@@ -54,19 +55,32 @@ public class SceneTransitionManager : MonoBehaviour
 				AreaSpawnPoint spawnPoint = FindObjectsOfType<AreaSpawnPoint>().Where(sP => sP.Identifier == nextSceneSpawnPointIdentifier).FirstOrDefault();
 				player.transform.position = spawnPoint.transform.position;
 			}
+			BindCameraToPlayer();
 			animator.SetTrigger("FadeIn");
 		}
 		else
 		{
 			player.SetActive(false);
-			battleSetup.SetupBattle();
+			battleManager.SetupBattle();
+			animator.SetTrigger("FadeIn");
 		}
 	}
 
 	public void GoToBattle(GameObject enemyVehicle)
 	{
-		battleSetup.SetupBattleScenario(enemyVehicle);
+		battleManager.SetupBattleScenario(enemyVehicle);
 		currentSceneType = ESceneType.Arena;
 		SceneManager.LoadScene("Scenes/Arenas/BasicArena");
+	}
+
+	public void ReturnToWorld()
+	{
+		SceneManager.LoadScene(worldSceneName);
+		currentSceneType = ESceneType.Town;
+	}
+
+	private void BindCameraToPlayer()
+	{
+		Camera.main.GetComponent<CameraControl>().player = player.transform;
 	}
 }

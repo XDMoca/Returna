@@ -1,21 +1,17 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class VehicleHealthManager : MonoBehaviour
 {
-
-	[SerializeField]
-	private int Health;
+	public int Health;
 	[SerializeField]
 	private int MaxHealth;
+
+	public event EventHandler OnHealthChange;
 
 	void Start()
 	{
 		Health = MaxHealth;
-	}
-
-	void Update()
-	{
-
 	}
 
 	public void ReceiveDamage(int damage)
@@ -27,5 +23,13 @@ public class VehicleHealthManager : MonoBehaviour
 
 		if (Health < 0)
 			Health = 0;
+		
+		HealthChanged();
+	}
+
+	private void HealthChanged()
+	{
+		if (OnHealthChange != null)
+			OnHealthChange(this, new EventArgs());
 	}
 }
