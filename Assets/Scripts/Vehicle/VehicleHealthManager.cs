@@ -4,8 +4,7 @@ using UnityEngine;
 public class VehicleHealthManager : MonoBehaviour
 {
 	public int Health;
-	[SerializeField]
-	private int MaxHealth;
+	public int MaxHealth;
 
 	public event EventHandler OnHealthChange;
 

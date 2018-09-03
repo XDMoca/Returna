@@ -10,6 +10,7 @@ public class BattleManager : MonoBehaviour
 	private VehicleHealthManager enemyHealth;
 
 	private SceneTransitionManager sceneTransition;
+	private BattleHUDManager hud;
 
 	void Start()
 	{
@@ -28,6 +29,9 @@ public class BattleManager : MonoBehaviour
 		enemyHealth = Instantiate(enemyVehicle, spawnPoints[1].transform.position, spawnPoints[1].transform.rotation).GetComponent<VehicleHealthManager>();
 		playerHealth.OnHealthChange += (s, e) => CheckBattleStatus();
 		enemyHealth.OnHealthChange += (s, e) => CheckBattleStatus();
+		
+		hud = FindObjectOfType<BattleHUDManager>();
+		hud.InitialiseHealthBars(playerHealth, enemyHealth);
 	}
 
 	private void CheckBattleStatus()

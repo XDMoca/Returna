@@ -75,8 +75,8 @@ public class SceneTransitionManager : MonoBehaviour
 
 	public void ReturnToWorld()
 	{
-		SceneManager.LoadScene(worldSceneName);
 		currentSceneType = ESceneType.Town;
+		SceneManager.LoadScene(worldSceneName);
 	}
 
 	private void BindCameraToPlayer()
