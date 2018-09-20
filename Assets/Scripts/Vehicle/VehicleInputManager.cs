@@ -9,7 +9,7 @@ public abstract class AVehicleInputManager : MonoBehaviour {
 	[ReadOnly]
 	public float VerticalMovementInput = 0;
 	[ReadOnly]
-	public bool handbrakePressed = false;
+	public bool handbrakeHeld = false;
 	[ReadOnly]
 	public bool fireHeld = false;
 
@@ -23,7 +23,7 @@ public abstract class AVehicleInputManager : MonoBehaviour {
 	{
 		HorizontalMovementInput = 0;
 		VerticalMovementInput = 0;
-		handbrakePressed = false;
+		handbrakeHeld = false;
 		fireHeld = false;
 	}
 

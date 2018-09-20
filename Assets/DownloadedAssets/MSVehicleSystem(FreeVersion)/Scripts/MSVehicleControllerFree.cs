@@ -388,7 +388,7 @@ public class MSVehicleControllerFree : MonoBehaviour
 	[HideInInspector]
 	public bool disableVehicle = false;
 	[HideInInspector]
-	public bool handBrakeTrue;
+	public bool handBrakeOn;
 
 	void Awake()
 	{
@@ -464,7 +464,7 @@ public class MSVehicleControllerFree : MonoBehaviour
 
 		currentDownForceVehicle = _vehicleSettings.improveControl.downForce;
 
-		handBrakeTrue = false;
+		handBrakeOn = false;
 
 		ms_Rigidbody = GetComponent<Rigidbody>();
 		ms_Rigidbody.useGravity = true;
@@ -574,9 +574,13 @@ public class MSVehicleControllerFree : MonoBehaviour
 			engineInput = 0;
 		}
 
-		if (inputs.handbrakePressed && Time.timeScale > 0.2f)
+		if (inputs.handbrakeHeld)
 		{
-			handBrakeTrue = !handBrakeTrue;
+			handBrakeOn = true;
+		}
+		else
+		{
+			handBrakeOn = false;
 		}
 
 		//
@@ -1187,7 +1191,7 @@ public class MSVehicleControllerFree : MonoBehaviour
 		if (_sounds.engineSound)
 		{
 			engineSoundAUD.volume = Mathf.Lerp(engineSoundAUD.volume, Mathf.Clamp(Mathf.Abs(engineInput), 0.35f, 0.85f), Time.deltaTime * 5.0f);
-			if (handBrakeTrue || currentGear == 0)
+			if (handBrakeOn || currentGear == 0)
 			{
 				engineSoundAUD.pitch = Mathf.Lerp(engineSoundAUD.pitch, 0.85f + Mathf.Abs(inputs.VerticalMovementInput) * (_sounds.speedOfEngineSound * 0.7f - 0.85f), Time.deltaTime * 5.0f);
 			}
@@ -1313,9 +1317,8 @@ public class MSVehicleControllerFree : MonoBehaviour
 	IEnumerator TimeAutoGears(int gear)
 	{
 		changinGearsAuto = true;
-		yield return new WaitForSeconds(0.1f);
+		yield return new WaitForSeconds(0.05f);
 		currentGear = gear;
-		yield return new WaitForSeconds(timeAutoGear);
 		changinGearsAuto = false;
 	}
 	#endregion
@@ -1330,11 +1333,49 @@ public class MSVehicleControllerFree : MonoBehaviour
 		angleRefVolant = Mathf.Clamp(angle1Ref * maxAngleVolant, -maxAngleVolant, maxAngleVolant);
 
 		//APLICAR ANGULO NAS RODAS--------------------------------------------------------------------------------------------------------------
-		if (angle1Ref > 0.2f)
-		{
+		//if (angle1Ref > 0.2f)
+		//{
+		//	if (_wheels.rightFrontWheel.wheelTurn)
+		//	{
+		//		_wheels.rightFrontWheel.wheelCollider.steerAngle = angleRefVolant * 1.2f;
+		//	}
+		//	if (_wheels.leftFrontWheel.wheelTurn)
+		//	{
+		//		_wheels.leftFrontWheel.wheelCollider.steerAngle = angleRefVolant;
+		//	}
+		//	if (_wheels.rightRearWheel.wheelTurn)
+		//	{
+		//		_wheels.rightRearWheel.wheelCollider.steerAngle = angleRefVolant * 1.2f;
+		//	}
+		//	if (_wheels.leftRearWheel.wheelTurn)
+		//	{
+		//		_wheels.leftRearWheel.wheelCollider.steerAngle = angleRefVolant;
+		//	}
+		//}
+		//else if (angle1Ref < -0.2f)
+		//{
+		//	if (_wheels.rightFrontWheel.wheelTurn)
+		//	{
+		//		_wheels.rightFrontWheel.wheelCollider.steerAngle = angleRefVolant;
+		//	}
+		//	if (_wheels.leftFrontWheel.wheelTurn)
+		//	{
+		//		_wheels.leftFrontWheel.wheelCollider.steerAngle = angleRefVolant * 1.2f;
+		//	}
+		//	if (_wheels.rightRearWheel.wheelTurn)
+		//	{
+		//		_wheels.rightRearWheel.wheelCollider.steerAngle = angleRefVolant;
+		//	}
+		//	if (_wheels.leftRearWheel.wheelTurn)
+		//	{
+		//		_wheels.leftRearWheel.wheelCollider.steerAngle = angleRefVolant * 1.2f;
+		//	}
+		//}
+		//else
+		//{
 			if (_wheels.rightFrontWheel.wheelTurn)
 			{
-				_wheels.rightFrontWheel.wheelCollider.steerAngle = angleRefVolant * 1.2f;
+				_wheels.rightFrontWheel.wheelCollider.steerAngle = angleRefVolant;
 			}
 			if (_wheels.leftFrontWheel.wheelTurn)
 			{
@@ -1342,51 +1383,13 @@ public class MSVehicleControllerFree : MonoBehaviour
 			}
 			if (_wheels.rightRearWheel.wheelTurn)
 			{
-				_wheels.rightRearWheel.wheelCollider.steerAngle = angleRefVolant * 1.2f;
-			}
-			if (_wheels.leftRearWheel.wheelTurn)
-			{
-				_wheels.leftRearWheel.wheelCollider.steerAngle = angleRefVolant;
-			}
-		}
-		else if (angle1Ref < -0.2f)
-		{
-			if (_wheels.rightFrontWheel.wheelTurn)
-			{
-				_wheels.rightFrontWheel.wheelCollider.steerAngle = angleRefVolant;
-			}
-			if (_wheels.leftFrontWheel.wheelTurn)
-			{
-				_wheels.leftFrontWheel.wheelCollider.steerAngle = angleRefVolant * 1.2f;
-			}
-			if (_wheels.rightRearWheel.wheelTurn)
-			{
-				_wheels.rightRearWheel.wheelCollider.steerAngle = angleRefVolant;
-			}
-			if (_wheels.leftRearWheel.wheelTurn)
-			{
-				_wheels.leftRearWheel.wheelCollider.steerAngle = angleRefVolant * 1.2f;
-			}
-		}
-		else
-		{
-			if (_wheels.rightFrontWheel.wheelTurn)
-			{
-				_wheels.rightFrontWheel.wheelCollider.steerAngle = angleRefVolant;
-			}
-			if (_wheels.leftFrontWheel.wheelTurn)
-			{
-				_wheels.leftFrontWheel.wheelCollider.steerAngle = angleRefVolant;
-			}
-			if (_wheels.rightRearWheel.wheelTurn)
-			{
 				_wheels.rightRearWheel.wheelCollider.steerAngle = angleRefVolant;
 			}
 			if (_wheels.leftRearWheel.wheelTurn)
 			{
 				_wheels.leftRearWheel.wheelCollider.steerAngle = angleRefVolant;
 			}
-		}
+	//	}
 
 		if (_vehicleSettings.volant)
 		{
@@ -1418,7 +1421,7 @@ public class MSVehicleControllerFree : MonoBehaviour
 				return 0;
 			}
 		}
-		if (handBrakeTrue)
+		if (handBrakeOn)
 		{
 			return 0;
 		}
@@ -1430,7 +1433,7 @@ public class MSVehicleControllerFree : MonoBehaviour
 		{
 			return 0;
 		}
-		if (inputs.handbrakePressed)
+		if (inputs.handbrakeHeld)
 		{
 			return 0;
 		}
@@ -1507,45 +1510,32 @@ public class MSVehicleControllerFree : MonoBehaviour
 		//Freio de pé
 		if (currentGear > 0)
 		{
-			currentBrakeValue = Mathf.Abs(Mathf.Clamp(brakeVerticalInput, -1.0f, 0.0f)) * 1.5f;
+			currentBrakeValue = Mathf.Abs(Mathf.Clamp(brakeVerticalInput, -1.0f, 0.0f)) * 2f;
 		}
 		else if (currentGear < 0)
 		{
-			currentBrakeValue = Mathf.Abs(Mathf.Clamp(brakeVerticalInput, 0.0f, 1.0f)) * 1.5f;
+			currentBrakeValue = Mathf.Abs(Mathf.Clamp(brakeVerticalInput, 0.0f, 1.0f)) * 2f;
 		}
 		else if (currentGear == 0)
 		{
 			if (mediumRPM > 0)
 			{
-				currentBrakeValue = Mathf.Abs(Mathf.Clamp(brakeVerticalInput, -1.0f, 0.0f)) * 1.5f;
+				currentBrakeValue = Mathf.Abs(Mathf.Clamp(brakeVerticalInput, -1.0f, 0.0f)) * 2f;
 			}
 			else
 			{
-				currentBrakeValue = Mathf.Abs(Mathf.Clamp(brakeVerticalInput, 0.0f, 1.0f)) * 1.5f;
+				currentBrakeValue = Mathf.Abs(Mathf.Clamp(brakeVerticalInput, 0.0f, 1.0f)) * 2f;
 			}
 		}
 
 		// FREIO DE MÃO
-		handBrake_Input = 0.0f;
-		if (handBrakeTrue)
+		if (inputs.handbrakeHeld)
 		{
-			if (Mathf.Abs(brakeVerticalInput) < 0.9f)
-			{
-				handBrake_Input = 2;
-			}
-			else
-			{
-				handBrake_Input = 0;
-				handBrakeTrue = false;
-			}
+			handBrake_Input = 2;
 		}
 		else
 		{
 			handBrake_Input = 0;
-		}
-		if (inputs.handbrakePressed)
-		{
-			handBrake_Input = 2;
 		}
 		handBrake_Input = handBrake_Input * 1000;
 		//FREIO TOTAL
@@ -1553,10 +1543,10 @@ public class MSVehicleControllerFree : MonoBehaviour
 		totalHandBrake = handBrake_Input * 0.5f * _vehicleSettings.vehicleMass;
 
 
-		if (Mathf.Abs(mediumRPM) < 15 && Mathf.Abs(brakeVerticalInput) < 0.05f && !handBrakeTrue && (totalFootBrake + totalHandBrake) < 100)
+		if (Mathf.Abs(mediumRPM) < 15 && Mathf.Abs(brakeVerticalInput) < 0.05f && !handBrakeOn && (totalFootBrake + totalHandBrake) < 100)
 		{
 			brakingAuto = true;
-			totalFootBrake = 1.5f * _vehicleSettings.vehicleMass;
+			//totalFootBrake = 1.5f * _vehicleSettings.vehicleMass;
 		}
 		else
 		{
@@ -1565,7 +1555,7 @@ public class MSVehicleControllerFree : MonoBehaviour
 
 
 		//freiar\/
-		if (totalFootBrake > 10)
+		if (totalFootBrake > 0)//10)
 		{
 			isBraking = true;
 		}
@@ -1574,13 +1564,13 @@ public class MSVehicleControllerFree : MonoBehaviour
 			isBraking = false;
 		}
 
-		if (!brakingAuto)
-		{
-			if (isBraking && Mathf.Abs(KMh) > 1.2f)
-			{
-				totalFootBrake = 0;
-			}
-		}
+		//if (!brakingAuto)
+		//{
+		//	if (isBraking && Mathf.Abs(KMh) > 1.2f)
+		//	{
+		//		totalFootBrake = 0;
+		//	}
+		//}
 
 		ApplyBrakeInWheels(_wheels.rightFrontWheel.wheelCollider, _wheels.rightFrontWheel.wheelHandBrake);
 		ApplyBrakeInWheels(_wheels.leftFrontWheel.wheelCollider, _wheels.leftFrontWheel.wheelHandBrake);

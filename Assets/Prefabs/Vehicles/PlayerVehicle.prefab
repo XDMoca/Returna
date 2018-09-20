@@ -537,7 +537,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1312274797108910}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 4, z: -10}
+  m_LocalPosition: {x: 0, y: 4, z: -12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4758160223612724}
@@ -1651,8 +1651,8 @@ MonoBehaviour:
   - {fileID: 1451380701027002}
   - {fileID: 1335422524581166}
   _vehicleTorque:
-    maxVelocityKMh: 250
-    engineTorque: 7
+    maxVelocityKMh: 200
+    engineTorque: 50
     numberOfGears: 10
     speedOfGear: 1.5
     manualAdjustmentOfTorques:
@@ -2061,8 +2061,8 @@ MonoBehaviour:
     vehicleMass: 1500
     improveControl:
       tireSlipsFactor: 0.85
-      helpToTurn: 0.3
-      helpToStraightenOut: 0.1
+      helpToTurn: 2
+      helpToStraightenOut: 1
       downForce: 2
     _aerodynamics:
       extraGravity: 1
@@ -2127,7 +2127,7 @@ MonoBehaviour:
     rightRearWheel:
       wheelMesh: {fileID: 4089983643926504}
       wheelCollider: {fileID: 146258336600645000}
-      wheelDrive: 0
+      wheelDrive: 1
       wheelHandBrake: 1
       skidMarkShift: 0.04
       wheelTurn: 0
@@ -2140,7 +2140,7 @@ MonoBehaviour:
     leftRearWheel:
       wheelMesh: {fileID: 4057710898128866}
       wheelCollider: {fileID: 146330093250478140}
-      wheelDrive: 0
+      wheelDrive: 1
       wheelHandBrake: 1
       skidMarkShift: -0.04
       wheelTurn: 0
@@ -2163,13 +2163,13 @@ MonoBehaviour:
     wheelImpactSound: {fileID: 8300000, guid: a99ada3784fb7154da6bd9979d56d23a, type: 3}
   _skidMarks:
     standardBrandWidth: 0.4
-    sensibility: 2
+    sensibility: 1
     standardColor: {r: 0.15, g: 0.15, b: 0.15, a: 0}
   skidMarksShader: {fileID: 4800000, guid: 0e9783dda7aa8884491cd17040cdaf4b, type: 3}
   KMh: 0
   currentGear: 0
   disableVehicle: 0
-  handBrakeTrue: 0
+  handBrakeOn: 0
 --- !u!114 &114044685687656002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2196,7 +2196,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HorizontalMovementInput: 0
   VerticalMovementInput: 0
-  handbrakePressed: 0
+  handbrakeHeld: 0
   fireHeld: 0
 --- !u!114 &114513339212644708
 MonoBehaviour:

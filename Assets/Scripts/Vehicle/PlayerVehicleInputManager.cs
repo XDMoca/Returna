@@ -6,7 +6,7 @@ public class PlayerVehicleInputManager : AVehicleInputManager
 	{
 		HorizontalMovementInput = Input.GetAxisRaw(Constants.Inputs.Horizontal);
 		VerticalMovementInput = Input.GetAxisRaw(Constants.Inputs.Vertical);
-		handbrakePressed = Input.GetButtonDown(Constants.Inputs.Handbrake);
+		handbrakeHeld = Input.GetButton(Constants.Inputs.Handbrake);
 		fireHeld = Input.GetButton(Constants.Inputs.Fire);
 	}
 }
