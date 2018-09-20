@@ -9,4 +9,5 @@ public class Weapon : ScriptableObject
 	public GameObject Projectile;
 	public GameObject WeaponModel;
 	public string Description;
+	public AudioClip FireSound;
 }

@@ -16,3 +16,4 @@ MonoBehaviour:
   Projectile: {fileID: 1312180976101800, guid: e4bbcd20477214b4083741649075231a, type: 2}
   WeaponModel: {fileID: 0}
   Description: Entry Level Machine Gun
+  FireSound: {fileID: 8300000, guid: 20b57a771ebe3e64a8414abc7ae182ed, type: 3}

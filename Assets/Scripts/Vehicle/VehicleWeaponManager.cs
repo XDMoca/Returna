@@ -60,5 +60,6 @@ public class VehicleWeaponManager : MonoBehaviour
 		timeSinceLastFire = 0;
 		Collider projectileCollider = Instantiate(activeWeapon.Projectile, transform.position + new Vector3(0, 0.2f, 0), transform.rotation).GetComponent<Collider>();
 		Physics.IgnoreCollision(vehicleCollider, projectileCollider, true);
+		AudioSource.PlayClipAtPoint(activeWeapon.FireSound, transform.position);
 	}
 }
