@@ -11,9 +11,12 @@ public class SceneTransitionManager : MonoBehaviour
 	private ESpawnPointIdentifiers nextSceneSpawnPointIdentifier;
 	private ESceneType currentSceneType;
 	private BattleManager battleManager;
+	private DialogueManager dialogueManager;
 
 	[SerializeField]
 	private GameObject playerPrefab;
+
+	private PostBattleInformation currentOpponentInformation = null;
 
 	void Awake()
 	{
@@ -25,13 +28,14 @@ public class SceneTransitionManager : MonoBehaviour
 		if (player == null)
 		{
 			player = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
+			dialogueManager = player.GetComponent<DialogueManager>();
 			BindCameraToPlayer();
 		}
 		animator.SetTrigger("FadeIn");
 		DontDestroyOnLoad(player);
 		DontDestroyOnLoad(gameObject);
 	}
-	
+
 	public void GoToNextArea(string NextAreaName, ESpawnPointIdentifiers NextAreaSpawnPointIdentifier)
 	{
 		currentSceneType = ESceneType.Town;
@@ -55,10 +59,14 @@ public class SceneTransitionManager : MonoBehaviour
 				AreaSpawnPoint spawnPoint = FindObjectsOfType<AreaSpawnPoint>().Where(sP => sP.Identifier == nextSceneSpawnPointIdentifier).FirstOrDefault();
 				player.transform.position = spawnPoint.transform.position;
 			}
+			else
+			{
+				OnReturnFromBattle();
+			}
 			BindCameraToPlayer();
 			animator.SetTrigger("FadeIn");
 		}
-		else
+		else if (currentSceneType == ESceneType.Arena)
 		{
 			player.SetActive(false);
 			battleManager.SetupBattle();
@@ -66,11 +74,18 @@ public class SceneTransitionManager : MonoBehaviour
 		}
 	}
 
-	public void GoToBattle(GameObject enemyVehicle)
+	public void GoToBattle(OpponentCharacter opponent)
 	{
-		battleManager.SetupBattleScenario(enemyVehicle);
+		currentOpponentInformation = opponent.PostBattleInformation;
+		battleManager.SetupBattleScenario(opponent.Vehicle);
 		currentSceneType = ESceneType.Arena;
 		SceneManager.LoadScene("Scenes/Arenas/BasicArena");
+	}
+
+	private void OnReturnFromBattle()
+	{
+		dialogueManager.StartDialogue(currentOpponentInformation.PlayerVictoryDialogue);
+		currentOpponentInformation = null;
 	}
 
 	public void ReturnToWorld()

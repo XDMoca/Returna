@@ -13,8 +13,9 @@ public class InteractionManager : MonoBehaviour
 
 	[ReadOnly]
 	public bool InteractionTargetInRange;
-	[ReadOnly]
-	public bool Interacting;
+	
+	public bool Interacting { get { return dialogueManager.InDialogue; } }
+
 	[SerializeField]
 	private float interactionDetectionRange;
 	[SerializeField]
@@ -24,7 +25,8 @@ public class InteractionManager : MonoBehaviour
 
 	void Start()
 	{
-		dialogueManager = FindObjectOfType<DialogueManager>();
+		dialogueManager = GetComponent<DialogueManager>();
+		dialogueManager.OnBattleEvent += (s, e) => TryStartBattle();
 		sceneTransitionManager = FindObjectOfType<SceneTransitionManager>();
 		SetupInteractionIndicator();
 	}
@@ -57,16 +59,11 @@ public class InteractionManager : MonoBehaviour
 			InteractableEntity target = interactionTarget as InteractableEntity;
 			if (Interacting)
 			{
-				Interacting = dialogueManager.ShowNextSentence();
-				if (!Interacting && target.IsFightable)
-				{
-					sceneTransitionManager.GoToBattle(target.Vehicle);
-				}
+				dialogueManager.NextSentence();
 			}
 			else
 			{
-				Interacting = true;
-				dialogueManager.StartDialog(target.name, target.GetDialogue());
+				dialogueManager.StartDialogue(target.Dialogue);
 			}
 		}
 
@@ -74,7 +71,15 @@ public class InteractionManager : MonoBehaviour
 		{
 			InteractableDoor target = interactionTarget as InteractableDoor;
 			sceneTransitionManager.GoToNextArea(target.NextAreaName, target.NextAreaSpawnPointIdentifier);
-			Interacting = false;
+		}
+	}
+
+	private void TryStartBattle()
+	{
+		if (interactionTarget is OpponentCharacter)
+		{
+			OpponentCharacter opponent = interactionTarget as OpponentCharacter;
+			sceneTransitionManager.GoToBattle(opponent);
 		}
 	}
 

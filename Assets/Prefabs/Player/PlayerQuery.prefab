@@ -27,6 +27,8 @@ GameObject:
   - component: {fileID: 114066373119804722}
   - component: {fileID: 114928811718762590}
   - component: {fileID: 136799288826631264}
+  - component: {fileID: 114143996614991226}
+  - component: {fileID: 114849749174777960}
   m_Layer: 11
   m_Name: PlayerQuery
   m_TagString: Player
@@ -921,6 +923,18 @@ MonoBehaviour:
     HorizontalMovementInput: 0
     VerticalMovementInput: 0
     interactPressed: 0
+--- !u!114 &114143996614991226
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1001343125072836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38b3689e747495b4d920fc326e352398, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Money: 0
 --- !u!114 &114572743669761836
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -951,6 +965,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   footstepClip: {fileID: 8300000, guid: bbb9ff8be7c298040a926e224d347c20, type: 3}
+--- !u!114 &114849749174777960
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1001343125072836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 141a27b5c32f35f46bae3057a2b9467b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentDialogueItem:
+    Text: 
+    SpeakerName: 
+    FightStart: 0
+  InDialogue: 0
 --- !u!114 &114928811718762590
 MonoBehaviour:
   m_ObjectHideFlags: 1

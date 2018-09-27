@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DialogueManager : MonoBehaviour {
+public class DialoguePanelManager : MonoBehaviour {
 
     [SerializeField]
     private Text speakerNameText;
@@ -14,34 +14,32 @@ public class DialogueManager : MonoBehaviour {
     [SerializeField]
     private float timeBetweenLetters;
 
-    private Queue<string> sentences;
+	private DialogueManager dialogueManager;
 
 	void Start () {
-        dialoguePanel.gameObject.SetActive(false);
+		dialogueManager = GameObject.FindGameObjectWithTag(Constants.Tags.Player).GetComponent<DialogueManager>();
+		dialogueManager.OnDialogueStart += (s, e) => StartDialog();
+		dialogueManager.OnDialogueNextSentence += (s, e) => ShowNextSentence();
+		dialogueManager.OnDialogueEnd += (s, e) => EndDialogue();
+		dialoguePanel.gameObject.SetActive(false);
 	}
 
-    public void StartDialog(string speaker, Queue<string> sentences)
+    public void StartDialog()
     {
-        this.sentences = sentences;
         dialoguePanel.gameObject.SetActive(true);
-        speakerNameText.text = speaker;
-        ShowNextSentence();
     }
 
-    public bool ShowNextSentence()
+    public void ShowNextSentence()
     {
-        if (sentences.Count == 0)
-            return EndDialogue();
         StopAllCoroutines();
-        StartCoroutine(TypeOutSentence(sentences.Dequeue()));
-        return true;
+		speakerNameText.text = dialogueManager.CurrentDialogueItem.SpeakerName;
+        StartCoroutine(TypeOutSentence(dialogueManager.CurrentDialogueItem.Text));
     }
 
-    bool EndDialogue()
+    public void EndDialogue()
     {
         quoteText.text = "";
         dialoguePanel.gameObject.SetActive(false);
-        return false;
     }
 
     IEnumerator TypeOutSentence(string sentence)
