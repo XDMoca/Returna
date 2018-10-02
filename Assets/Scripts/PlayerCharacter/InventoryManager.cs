@@ -3,10 +3,22 @@ using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
-
+	public static InventoryManager instance = null;
 	public int Money;
 
 	public event EventHandler OnMoneyChange;
+
+	private void Awake()
+	{
+		if (instance == null)
+		{
+			instance = this;
+		}
+		else if (instance != this)
+		{
+			Destroy(gameObject);
+		}
+	}
 
 	private void MoneyChanged()
 	{

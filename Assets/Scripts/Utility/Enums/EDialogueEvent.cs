@@ -1,5 +1,6 @@
 ﻿public enum EDialogueEvent
 {
 	None,
-	BattleStart
+	BattleStart,
+	MoneyGain
 }

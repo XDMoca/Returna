@@ -224,7 +224,6 @@ public class MSVehicleControllerFree : MonoBehaviour
 	AVehicleInputManager inputs;
 
 	bool changinGearsAuto;
-	bool brakingAuto;
 	bool colliding;
 
 	bool enableSkidMarksOnStart;
@@ -238,7 +237,6 @@ public class MSVehicleControllerFree : MonoBehaviour
 	float minPitchAud;
 	float leftDifferential;
 	float rightDifferential;
-	float timeAutoGear;
 	float reverseForce;
 	float engineInput;
 	float angleRefVolant;
@@ -1292,7 +1290,6 @@ public class MSVehicleControllerFree : MonoBehaviour
 			{
 				if (currentGear < _vehicleTorque.numberOfGears && !changinGearsAuto && currentGear != -1)
 				{
-					timeAutoGear = 1.5f;
 					StartCoroutine("TimeAutoGears", currentGear + 1);
 				}
 			}
@@ -1300,7 +1297,6 @@ public class MSVehicleControllerFree : MonoBehaviour
 			{
 				if (currentGear > 1 && !changinGearsAuto)
 				{
-					timeAutoGear = 0;
 					StartCoroutine("TimeAutoGears", currentGear - 1);
 				}
 			}
@@ -1308,7 +1304,6 @@ public class MSVehicleControllerFree : MonoBehaviour
 			{
 				if (currentGear < _vehicleTorque.numberOfGears && currentGear != -1)
 				{
-					timeAutoGear = 0.0f;
 					StartCoroutine("TimeAutoGears", currentGear + 1);
 				}
 			}
@@ -1541,17 +1536,6 @@ public class MSVehicleControllerFree : MonoBehaviour
 		//FREIO TOTAL
 		totalFootBrake = currentBrakeValue * 0.5f * _vehicleSettings.vehicleMass;
 		totalHandBrake = handBrake_Input * 0.5f * _vehicleSettings.vehicleMass;
-
-
-		if (Mathf.Abs(mediumRPM) < 15 && Mathf.Abs(brakeVerticalInput) < 0.05f && !handBrakeOn && (totalFootBrake + totalHandBrake) < 100)
-		{
-			brakingAuto = true;
-			//totalFootBrake = 1.5f * _vehicleSettings.vehicleMass;
-		}
-		else
-		{
-			brakingAuto = false;
-		}
 
 
 		//freiar\/

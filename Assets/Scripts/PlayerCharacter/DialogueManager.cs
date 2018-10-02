@@ -15,6 +15,7 @@ public class DialogueManager : MonoBehaviour
 	public event EventHandler OnDialogueNextSentence;
 	public event EventHandler OnDialogueEnd;
 	public event EventHandler OnBattleEvent;
+	public event EventHandler OnMoneyGainEvent;
 
 	public void StartDialogue(params DialogueItem[] dialogueItems)
 	{
@@ -27,10 +28,7 @@ public class DialogueManager : MonoBehaviour
 
 	public void NextSentence()
 	{
-		if (CurrentDialogueItem.DialogueEvent != EDialogueEvent.None)
-		{
-			HandleDialogueEvent();
-		}
+		CheckDialogueEvents();
 
 		if (dialogueItems.Count == 0)
 		{
@@ -44,9 +42,18 @@ public class DialogueManager : MonoBehaviour
 			OnDialogueNextSentence(this, new EventArgs());
 	}
 
+	private void CheckDialogueEvents()
+	{
+		if (CurrentDialogueItem != null && CurrentDialogueItem.DialogueEvent != EDialogueEvent.None)
+		{
+			HandleDialogueEvent();
+		}
+	}
+
 	public void EndDialogue()
 	{
 		dialogueItems = null;
+		CurrentDialogueItem = null;
 		InDialogue = false;
 		if (OnDialogueEnd != null)
 			OnDialogueEnd(this, new EventArgs());
@@ -59,6 +66,10 @@ public class DialogueManager : MonoBehaviour
 			case EDialogueEvent.BattleStart:
 				if (OnBattleEvent != null)
 					OnBattleEvent(this, new EventArgs());
+				break;
+			case EDialogueEvent.MoneyGain:
+				if (OnMoneyGainEvent != null)
+					OnMoneyGainEvent(this, new EventArgs());
 				break;
 		}
 	}

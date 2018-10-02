@@ -566,7 +566,7 @@ MonoBehaviour:
     PlayerVictoryDialogue:
       Text: GGs
       SpeakerName: Query-dono
-      DialogueEvent: 0
+      DialogueEvent: 2
     OpponentVictoryDialogue:
       Text: Im dabes
       SpeakerName: Query-dono

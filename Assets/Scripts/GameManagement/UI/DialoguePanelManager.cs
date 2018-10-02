@@ -38,7 +38,8 @@ public class DialoguePanelManager : MonoBehaviour {
 
     public void EndDialogue()
     {
-        quoteText.text = "";
+		StopAllCoroutines();
+		quoteText.text = "";
         dialoguePanel.gameObject.SetActive(false);
     }
 

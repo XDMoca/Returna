@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,14 +10,16 @@ public class SceneTransitionManager : MonoBehaviour
 	private GameObject player;
 	private string worldSceneName = "Scenes/TownScene";
 	private ESpawnPointIdentifiers nextSceneSpawnPointIdentifier;
-	private ESceneType currentSceneType;
+	public ESceneType currentSceneType;
 	private BattleManager battleManager;
 	private DialogueManager dialogueManager;
+
+	public event EventHandler OnLevelLoad;
 
 	[SerializeField]
 	private GameObject playerPrefab;
 
-	private PostBattleInformation currentOpponentInformation = null;
+	public PostBattleInformation currentOpponentInformation = null;
 
 	void Awake()
 	{
@@ -34,6 +37,12 @@ public class SceneTransitionManager : MonoBehaviour
 		animator.SetTrigger("FadeIn");
 		DontDestroyOnLoad(player);
 		DontDestroyOnLoad(gameObject);
+	}
+
+	private void Start()
+	{
+		if (OnLevelLoad != null)
+			OnLevelLoad(this, new EventArgs());
 	}
 
 	public void GoToNextArea(string NextAreaName, ESpawnPointIdentifiers NextAreaSpawnPointIdentifier)
@@ -72,6 +81,9 @@ public class SceneTransitionManager : MonoBehaviour
 			battleManager.SetupBattle();
 			animator.SetTrigger("FadeIn");
 		}
+
+		if (OnLevelLoad != null)
+			OnLevelLoad(this, new EventArgs());
 	}
 
 	public void GoToBattle(OpponentCharacter opponent)
@@ -85,6 +97,7 @@ public class SceneTransitionManager : MonoBehaviour
 	private void OnReturnFromBattle()
 	{
 		dialogueManager.StartDialogue(currentOpponentInformation.PlayerVictoryDialogue);
+		InventoryManager.instance.EarnMoney(currentOpponentInformation.PrizeMoney);
 		currentOpponentInformation = null;
 	}
 

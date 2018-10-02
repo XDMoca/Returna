@@ -10,7 +10,7 @@ public class InteractionManager : MonoBehaviour
 	[SerializeField]
 	private GameObject interactionIndicatorPrefab;
 	private InteractionIndicator interactionIndicator;
-
+	
 	[ReadOnly]
 	public bool InteractionTargetInRange;
 	
@@ -23,7 +23,7 @@ public class InteractionManager : MonoBehaviour
 	[SerializeField]
 	private bool DebugMode;
 
-	void Start()
+	void Awake()
 	{
 		dialogueManager = GetComponent<DialogueManager>();
 		dialogueManager.OnBattleEvent += (s, e) => TryStartBattle();
