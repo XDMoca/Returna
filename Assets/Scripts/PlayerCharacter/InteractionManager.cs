@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class InteractionManager : MonoBehaviour
 {
@@ -26,7 +27,6 @@ public class InteractionManager : MonoBehaviour
 	void Awake()
 	{
 		dialogueManager = GetComponent<DialogueManager>();
-		dialogueManager.OnBattleEvent += (s, e) => TryStartBattle();
 		sceneTransitionManager = FindObjectOfType<SceneTransitionManager>();
 		SetupInteractionIndicator();
 	}
@@ -63,7 +63,7 @@ public class InteractionManager : MonoBehaviour
 			}
 			else
 			{
-				dialogueManager.StartDialogue(target.Dialogue);
+				dialogueManager.StartDialogue((target as DialoguePartner).DialoguePartnerInformation, target.Dialogue);
 			}
 		}
 
@@ -71,15 +71,6 @@ public class InteractionManager : MonoBehaviour
 		{
 			InteractableDoor target = interactionTarget as InteractableDoor;
 			sceneTransitionManager.GoToNextArea(target.NextAreaName, target.NextAreaSpawnPointIdentifier);
-		}
-	}
-
-	private void TryStartBattle()
-	{
-		if (interactionTarget is OpponentCharacter)
-		{
-			OpponentCharacter opponent = interactionTarget as OpponentCharacter;
-			sceneTransitionManager.GoToBattle(opponent);
 		}
 	}
 

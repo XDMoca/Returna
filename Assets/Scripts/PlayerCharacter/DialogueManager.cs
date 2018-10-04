@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class DialogueManager : MonoBehaviour
 {
+	public static DialogueManager instance = null;
 	private Queue<DialogueItem> dialogueItems;
+	private IDialoguePartnerInformation dialoguePartnerInformation;
 
 	[HideInInspector]
 	public DialogueItem CurrentDialogueItem;
@@ -14,11 +16,22 @@ public class DialogueManager : MonoBehaviour
 	public event EventHandler OnDialogueStart;
 	public event EventHandler OnDialogueNextSentence;
 	public event EventHandler OnDialogueEnd;
-	public event EventHandler OnBattleEvent;
-	public event EventHandler OnMoneyGainEvent;
 
-	public void StartDialogue(params DialogueItem[] dialogueItems)
+	private void Awake()
 	{
+		if (instance == null)
+		{
+			instance = this;
+		}
+		else if (instance != this)
+		{
+			Destroy(gameObject);
+		}
+	}
+
+	public void StartDialogue(IDialoguePartnerInformation dialoguePartnerInformation, params DialogueItem[] dialogueItems)
+	{
+		this.dialoguePartnerInformation = dialoguePartnerInformation;
 		InDialogue = true;
 		this.dialogueItems = GetDialogueArray(dialogueItems);
 		if (OnDialogueStart != null)
@@ -46,7 +59,7 @@ public class DialogueManager : MonoBehaviour
 	{
 		if (CurrentDialogueItem != null && CurrentDialogueItem.DialogueEvent != EDialogueEvent.None)
 		{
-			HandleDialogueEvent();
+			dialoguePartnerInformation.HandleDialogueEvent(CurrentDialogueItem.DialogueEvent);
 		}
 	}
 
@@ -54,24 +67,10 @@ public class DialogueManager : MonoBehaviour
 	{
 		dialogueItems = null;
 		CurrentDialogueItem = null;
+		dialoguePartnerInformation = null;
 		InDialogue = false;
 		if (OnDialogueEnd != null)
 			OnDialogueEnd(this, new EventArgs());
-	}
-
-	private void HandleDialogueEvent()
-	{
-		switch (CurrentDialogueItem.DialogueEvent)
-		{
-			case EDialogueEvent.BattleStart:
-				if (OnBattleEvent != null)
-					OnBattleEvent(this, new EventArgs());
-				break;
-			case EDialogueEvent.MoneyGain:
-				if (OnMoneyGainEvent != null)
-					OnMoneyGainEvent(this, new EventArgs());
-				break;
-		}
 	}
 
 

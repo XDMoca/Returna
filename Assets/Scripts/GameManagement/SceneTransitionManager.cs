@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneTransitionManager : MonoBehaviour
 {
+	public static SceneTransitionManager instance = null;
 
 	private Animator animator;
 	private GameObject player;
@@ -19,10 +20,18 @@ public class SceneTransitionManager : MonoBehaviour
 	[SerializeField]
 	private GameObject playerPrefab;
 
-	public PostBattleInformation currentOpponentInformation = null;
+	public DialoguePartnerInformation currentOpponentInformation = null;
 
 	void Awake()
 	{
+		if (instance == null)
+		{
+			instance = this;
+		}
+		else if (instance != this)
+		{
+			Destroy(gameObject);
+		}
 		currentSceneType = ESceneType.Town;
 		animator = GetComponent<Animator>();
 		battleManager = GetComponent<BattleManager>();
@@ -86,18 +95,17 @@ public class SceneTransitionManager : MonoBehaviour
 			OnLevelLoad(this, new EventArgs());
 	}
 
-	public void GoToBattle(OpponentCharacter opponent)
+	public void GoToBattle(DialoguePartnerInformation opponentInformation)
 	{
-		currentOpponentInformation = opponent.PostBattleInformation;
-		battleManager.SetupBattleScenario(opponent.Vehicle);
+		currentOpponentInformation = opponentInformation;
+		battleManager.SetupBattleScenario(opponentInformation.Vehicle);
 		currentSceneType = ESceneType.Arena;
 		SceneManager.LoadScene("Scenes/Arenas/BasicArena");
 	}
 
 	private void OnReturnFromBattle()
 	{
-		dialogueManager.StartDialogue(currentOpponentInformation.PlayerVictoryDialogue);
-		InventoryManager.instance.EarnMoney(currentOpponentInformation.PrizeMoney);
+		dialogueManager.StartDialogue(currentOpponentInformation, currentOpponentInformation.PlayerVictoryDialogue);
 		currentOpponentInformation = null;
 	}
 
