@@ -1,14 +1,14 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class DialoguePanelManager : MonoBehaviour {
 
     [SerializeField]
-    private Text speakerNameText;
+    private TextMeshProUGUI speakerNameText;
     [SerializeField]
-    private Text quoteText;
+    private TextMeshProUGUI quoteText;
     [SerializeField]
     private Image dialoguePanel;
     [SerializeField]

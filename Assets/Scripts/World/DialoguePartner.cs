@@ -13,6 +13,7 @@ public class DialoguePartnerInformation : IDialoguePartnerInformation
 	public DialogueItem PlayerVictoryDialogue;
 	public DialogueItem OpponentVictoryDialogue;
 	public int PrizeMoney;
+	public ShopItem[] ShopItems;
 
 	public void HandleDialogueEvent(EDialogueEvent dialogueEvent)
 	{
@@ -25,7 +26,7 @@ public class DialoguePartnerInformation : IDialoguePartnerInformation
 				InventoryManager.instance.EarnMoney(PrizeMoney);
 				break;
 			case EDialogueEvent.ShopOpen:
-				Debug.Log("Opening Shop");
+				ShopMenuManager.instance.OpenShopMenu(ShopItems);
 				break;
 			default:
 				throw new Exception("Dialogue event not supported");

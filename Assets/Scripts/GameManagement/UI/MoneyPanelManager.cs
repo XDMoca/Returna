@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class MoneyPanelManager : MonoBehaviour
 {
 	[SerializeField]
-	private Text MoneyText;
+	private TextMeshProUGUI MoneyText;
 	[SerializeField]
 	private Image MoneyPanel;
 
@@ -28,6 +29,6 @@ public class MoneyPanelManager : MonoBehaviour
 
 	void UpdateMoneyText()
 	{
-		MoneyText.text = InventoryManager.instance.Money.ToString();
+		MoneyText.text = "$" + InventoryManager.instance.Money.ToString();
 	}
 }
