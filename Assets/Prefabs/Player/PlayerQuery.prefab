@@ -934,7 +934,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38b3689e747495b4d920fc326e352398, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Money: 0
+  Money: 200
+  InventoryWeapons:
+  - {fileID: 11400000, guid: 9be96698419902c44a056f0170ec78a7, type: 2}
 --- !u!114 &114572743669761836
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -949,7 +951,6 @@ MonoBehaviour:
   interactionIndicatorPrefab: {fileID: 1069294094016502, guid: c57605b865df6d845ba09236e67411ec,
     type: 2}
   InteractionTargetInRange: 0
-  Interacting: 0
   interactionDetectionRange: 2
   interactionDetectionWidth: 1
   DebugMode: 0
@@ -979,7 +980,7 @@ MonoBehaviour:
   CurrentDialogueItem:
     Text: 
     SpeakerName: 
-    FightStart: 0
+    DialogueEvent: 0
   InDialogue: 0
 --- !u!114 &114928811718762590
 MonoBehaviour:

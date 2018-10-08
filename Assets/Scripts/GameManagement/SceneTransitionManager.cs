@@ -13,14 +13,13 @@ public class SceneTransitionManager : MonoBehaviour
 	private ESpawnPointIdentifiers nextSceneSpawnPointIdentifier;
 	public ESceneType currentSceneType;
 	private BattleManager battleManager;
-	private DialogueManager dialogueManager;
 
 	public event EventHandler OnLevelLoad;
 
 	[SerializeField]
 	private GameObject playerPrefab;
 
-	public DialoguePartnerInformation currentOpponentInformation = null;
+	private DialoguePartnerInformation currentOpponent = null;
 
 	void Awake()
 	{
@@ -40,7 +39,6 @@ public class SceneTransitionManager : MonoBehaviour
 		if (player == null)
 		{
 			player = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
-			dialogueManager = player.GetComponent<DialogueManager>();
 			BindCameraToPlayer();
 		}
 		animator.SetTrigger("FadeIn");
@@ -97,7 +95,7 @@ public class SceneTransitionManager : MonoBehaviour
 
 	public void GoToBattle(DialoguePartnerInformation opponentInformation)
 	{
-		currentOpponentInformation = opponentInformation;
+		currentOpponent = opponentInformation;
 		battleManager.SetupBattleScenario(opponentInformation.Vehicle);
 		currentSceneType = ESceneType.Arena;
 		SceneManager.LoadScene("Scenes/Arenas/BasicArena");
@@ -105,8 +103,8 @@ public class SceneTransitionManager : MonoBehaviour
 
 	private void OnReturnFromBattle()
 	{
-		dialogueManager.StartDialogue(currentOpponentInformation, currentOpponentInformation.PlayerVictoryDialogue);
-		currentOpponentInformation = null;
+		DialogueMenuManager.instance.InitiateDialogue(currentOpponent, currentOpponent.PlayerVictoryDialogue);
+		currentOpponent = null;
 	}
 
 	public void ReturnToWorld()

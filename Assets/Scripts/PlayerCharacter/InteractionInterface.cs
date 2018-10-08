@@ -1,10 +1,8 @@
 ﻿using System;
 using UnityEngine;
 
-public class InteractionManager : MonoBehaviour
+public class InteractionInterface : MonoBehaviour
 {
-
-	private DialogueManager dialogueManager;
 	private IInteractable interactionTarget;
 	private SceneTransitionManager sceneTransitionManager;
 
@@ -15,7 +13,7 @@ public class InteractionManager : MonoBehaviour
 	[ReadOnly]
 	public bool InteractionTargetInRange;
 	
-	public bool Interacting { get { return dialogueManager.InDialogue; } }
+	public bool Interacting { get { return DialogueMenuManager.instance.InDialogue || ShopMenuManager.instance.IsShopMenuOpen; } }
 
 	[SerializeField]
 	private float interactionDetectionRange;
@@ -26,7 +24,6 @@ public class InteractionManager : MonoBehaviour
 
 	void Awake()
 	{
-		dialogueManager = GetComponent<DialogueManager>();
 		sceneTransitionManager = FindObjectOfType<SceneTransitionManager>();
 		SetupInteractionIndicator();
 	}
@@ -57,13 +54,9 @@ public class InteractionManager : MonoBehaviour
 		if (interactionTarget is InteractableEntity)
 		{
 			InteractableEntity target = interactionTarget as InteractableEntity;
-			if (Interacting)
+			if (!Interacting)
 			{
-				dialogueManager.NextSentence();
-			}
-			else
-			{
-				dialogueManager.StartDialogue((target as DialoguePartner).DialoguePartnerInformation, target.Dialogue);
+				DialogueMenuManager.instance.InitiateDialogue((target as DialoguePartner).DialoguePartnerInformation, target.Dialogue);
 			}
 		}
 

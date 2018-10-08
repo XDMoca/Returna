@@ -3,13 +3,15 @@
 public class ShopMenuManager : MonoBehaviour
 {
 	public static ShopMenuManager instance = null;
-	private ShopItem[] shopItemsToDisplay;
 
 	[SerializeField]
 	private GameObject ShopItemButtonPrefab;
 	[SerializeField]
 	private GameObject ShopCanvasPrefab;
 	private ShopCanvas shopCanvasInstance;
+
+	[ReadOnly]
+	public bool IsShopMenuOpen = false;
 
 	void Awake()
 	{
@@ -25,7 +27,9 @@ public class ShopMenuManager : MonoBehaviour
 
 	public void OpenShopMenu(ShopItem[] shopItems)
 	{
-		shopItemsToDisplay = shopItems;
+		if (IsShopMenuOpen)
+			return;
+
 		shopCanvasInstance = Instantiate(ShopCanvasPrefab).GetComponent<ShopCanvas>();
 		foreach (ShopItem shopItem in shopItems)
 		{
@@ -33,10 +37,21 @@ public class ShopMenuManager : MonoBehaviour
 			button.GetComponent<ShopItemButton>().Initialise(shopItem);
 			shopCanvasInstance.AddShopItemButton(button);
 		}
+		shopCanvasInstance.SetFirstElementAsActive();
+		IsShopMenuOpen = true;
+	}
+
+	public void UpdateItemDetailPanel(ShopItem selectedShopItem)
+	{
+		shopCanvasInstance.SetItemDetails(selectedShopItem);
 	}
 
 	public void CloseShopMenu()
 	{
+		if (!IsShopMenuOpen)
+			return;
+
 		Destroy(shopCanvasInstance.gameObject);
+		IsShopMenuOpen = false;
 	}
 }

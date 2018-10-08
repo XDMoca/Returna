@@ -13,3 +13,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Weapon: {fileID: 11400000, guid: e93dbce0b8beef34bbdb77d5f3fb2a67, type: 2}
   Price: 150
+  DisplayName: Rocket Launcher
+  DisplayDamage: High
+  DisplayFireRate: Slow

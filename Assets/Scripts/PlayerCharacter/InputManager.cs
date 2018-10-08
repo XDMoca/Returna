@@ -2,9 +2,22 @@
 
 public class InputManager : MonoBehaviour
 {
-
+	public static InputManager instance = null;
 	[ReadOnly]
 	public InputsContainer inputsContainer;
+
+
+	private void Awake()
+	{
+		if (instance == null)
+		{
+			instance = this;
+		}
+		else if (instance != this)
+		{
+			Destroy(gameObject);
+		}
+	}
 
 	void Start()
 	{

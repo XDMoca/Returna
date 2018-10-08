@@ -439,7 +439,7 @@ MonoBehaviour:
   speakerNameText: {fileID: 114619179829113656}
   quoteText: {fileID: 114073771895860384}
   dialoguePanel: {fileID: 114945177893804172}
-  timeBetweenLetters: 0.05
+  timeBetweenLetters: 0.02
 --- !u!114 &114619179829113656
 MonoBehaviour:
   m_ObjectHideFlags: 1

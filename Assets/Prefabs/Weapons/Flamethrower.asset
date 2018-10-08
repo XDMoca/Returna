@@ -9,11 +9,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8645a9dfef93acc4198ff74e450662ad, type: 3}
-  m_Name: RocketLauncher
+  m_Name: Flamethrower
   m_EditorClassIdentifier: 
-  Name: Rocket Launcher
-  FireRate: 1
+  Name: Flamethrower
+  FireRate: 0.01
   Projectile: {fileID: 1312180976101800, guid: e4bbcd20477214b4083741649075231a, type: 2}
   WeaponModel: {fileID: 0}
-  Description: Stranger, Stranger... Now that's a weapon!
+  Description: I BURN! CAAAAN'T HOOOLD MEEEE NOOOOW!
   FireSound: {fileID: 8300000, guid: 20b57a771ebe3e64a8414abc7ae182ed, type: 3}

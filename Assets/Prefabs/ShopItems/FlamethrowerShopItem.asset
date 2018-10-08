@@ -9,10 +9,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 34ee2ff9040a0ae4997c928ed46d51aa, type: 3}
-  m_Name: MachineGunShopItem
+  m_Name: FlamethrowerShopItem
   m_EditorClassIdentifier: 
-  Weapon: {fileID: 11400000, guid: 9be96698419902c44a056f0170ec78a7, type: 2}
-  Price: 100
-  DisplayName: Machine Gun
-  DisplayDamage: Low
-  DisplayFireRate: Fast
+  Weapon: {fileID: 11400000, guid: 6e846e50097714646a81c5d62f643e0b, type: 2}
+  Price: 300
+  DisplayName: Flamethrower
+  DisplayDamage: Medium
+  DisplayFireRate: Continuous

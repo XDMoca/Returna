@@ -6,8 +6,8 @@ public class ProjectileManager : MonoBehaviour
 
 	[SerializeField]
 	private float speed;
-	[SerializeField]
-	private int damage;
+
+	public int damage;
 
 	private new Rigidbody rigidbody;
 

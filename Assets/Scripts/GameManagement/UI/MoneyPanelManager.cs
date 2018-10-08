@@ -15,7 +15,7 @@ public class MoneyPanelManager : MonoBehaviour
 	{
 		sceneTransitionManager = GetComponent<SceneTransitionManager>();
 		sceneTransitionManager.OnLevelLoad += (s, e) => ChangeMoneyPanelVisibility();
-		MoneyText.text = InventoryManager.instance.Money.ToString();
+		MoneyText.text = "$" + InventoryManager.instance.Money.ToString();
 		InventoryManager.instance.OnMoneyChange += (s, e) => UpdateMoneyText();
 	}
 

@@ -2,7 +2,7 @@
 
 [RequireComponent(typeof(InputManager))]
 [RequireComponent(typeof(Rigidbody))]
-[RequireComponent(typeof(InteractionManager))]
+[RequireComponent(typeof(InteractionInterface))]
 [RequireComponent(typeof(SoundPlayer))]
 [RequireComponent(typeof(CapsuleCollider))]
 public class PlayerStateManager : AStateMachine
@@ -20,7 +20,7 @@ public class PlayerStateManager : AStateMachine
 	[HideInInspector]
 	public Animator animator;
 	[HideInInspector]
-	public InteractionManager interactionManager;
+	public InteractionInterface interactionManager;
 	[HideInInspector]
 	public SoundPlayer soundPlayer;
 
@@ -28,7 +28,7 @@ public class PlayerStateManager : AStateMachine
 	{
 		inputManager = GetComponent<InputManager>();
 		animator = GetComponent<Animator>();
-		interactionManager = GetComponent<InteractionManager>();
+		interactionManager = GetComponent<InteractionInterface>();
 		rigidbody = GetComponent<Rigidbody>();
 		soundPlayer = GetComponent<SoundPlayer>();
 		cameraTransform = Camera.main.transform;
