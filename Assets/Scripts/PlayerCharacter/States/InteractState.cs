@@ -7,7 +7,7 @@ public class InteractState : AState<PlayerStateManager>
 
 	public override IState CheckTransition()
 	{
-		if (!stateManager.interactionManager.Interacting)
+		if (!stateManager.interactionInterface.Interacting)
 		{
 			return stateManager.states.FreeMovement;
 		}
@@ -24,10 +24,5 @@ public class InteractState : AState<PlayerStateManager>
 
 	public override void StateUpdate()
 	{
-
-		if (stateManager.inputManager.inputsContainer.interactPressed)
-		{
-			stateManager.interactionManager.Interact();
-		}
 	}
 }

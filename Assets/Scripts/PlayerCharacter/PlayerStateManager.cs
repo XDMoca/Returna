@@ -20,7 +20,7 @@ public class PlayerStateManager : AStateMachine
 	[HideInInspector]
 	public Animator animator;
 	[HideInInspector]
-	public InteractionInterface interactionManager;
+	public InteractionInterface interactionInterface;
 	[HideInInspector]
 	public SoundPlayer soundPlayer;
 
@@ -28,7 +28,7 @@ public class PlayerStateManager : AStateMachine
 	{
 		inputManager = GetComponent<InputManager>();
 		animator = GetComponent<Animator>();
-		interactionManager = GetComponent<InteractionInterface>();
+		interactionInterface = GetComponent<InteractionInterface>();
 		rigidbody = GetComponent<Rigidbody>();
 		soundPlayer = GetComponent<SoundPlayer>();
 		cameraTransform = Camera.main.transform;

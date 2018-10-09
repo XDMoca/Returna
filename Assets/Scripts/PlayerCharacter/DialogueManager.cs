@@ -4,30 +4,17 @@ using UnityEngine;
 
 public class DialogueManager : MonoBehaviour
 {
-	public static DialogueManager instance = null;
 	private Queue<DialogueItem> dialogueItems;
 	private IDialoguePartnerInformation dialoguePartnerInformation;
 
 	[HideInInspector]
 	public DialogueItem CurrentDialogueItem;
 
-	public bool InDialogue;
+	public bool InDialogue = false;
 
 	public event EventHandler OnDialogueStart;
 	public event EventHandler OnDialogueNextSentence;
 	public event EventHandler OnDialogueEnd;
-
-	private void Awake()
-	{
-		if (instance == null)
-		{
-			instance = this;
-		}
-		else if (instance != this)
-		{
-			Destroy(gameObject);
-		}
-	}
 
 	public void StartDialogue(IDialoguePartnerInformation dialoguePartnerInformation, params DialogueItem[] dialogueItems)
 	{

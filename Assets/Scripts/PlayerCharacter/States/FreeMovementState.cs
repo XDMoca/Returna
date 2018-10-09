@@ -32,9 +32,7 @@ public class FreeMovementState : AState<PlayerStateManager>
 
 	public override IState CheckTransition()
 	{
-		InputsContainer inputs = stateManager.inputManager.inputsContainer;
-
-		if (inputs.interactPressed && stateManager.interactionManager.InteractionTargetInRange)
+		if (stateManager.interactionInterface.Interacting)
 		{
 			stateManager.animator.SetBool("Walking", false);
 			return stateManager.states.Interact;

@@ -18,9 +18,6 @@ public class DialogueMenuManager : MonoBehaviour
 	private float timeBetweenLetters;
 
 	private DialogueManager dialogueManager;
-	private DialoguePartnerInformation dialoguePartnerInformation;
-	private DialogueItem[] dialogueItems;
-
 	public bool InDialogue { get { return dialogueManager.InDialogue; } }
 	private bool isTypingOutQuote = false;
 
@@ -34,11 +31,11 @@ public class DialogueMenuManager : MonoBehaviour
 		{
 			Destroy(gameObject);
 		}
+		dialogueManager = GetComponent<DialogueManager>();
 	}
 
 	void Start()
 	{
-		dialogueManager = DialogueManager.instance;
 		dialogueManager.OnDialogueStart += (s, e) => StartDialog();
 		dialogueManager.OnDialogueNextSentence += (s, e) => ShowNextSentence();
 		dialogueManager.OnDialogueEnd += (s, e) => EndDialogue();
@@ -47,19 +44,26 @@ public class DialogueMenuManager : MonoBehaviour
 
 	private void Update()
 	{
-		if (dialoguePartnerInformation == null)
-			return;
-
 		HandleInteractPress();
 	}
 
 	public void HandleInteractPress()
 	{
+		if (!InputManager.instance.inputsContainer.interactPressed)
+			return;
+
 		if (!dialogueManager.InDialogue)
 		{
-			dialogueManager.StartDialogue(dialoguePartnerInformation, dialogueItems);
+			if (InteractionInterface.instance.InteractionTargetInRange)
+			{
+				DialoguePartner partner = InteractionInterface.instance.interactionTarget as DialoguePartner;
+				if (partner != null)
+				{
+					InitiateDialogue(partner.DialoguePartnerInformation, partner.Dialogue);
+				}
+			}
 		}
-		else if (InputManager.instance.inputsContainer.interactPressed)
+		else
 		{
 			if (isTypingOutQuote)
 			{
@@ -68,7 +72,9 @@ public class DialogueMenuManager : MonoBehaviour
 				quoteText.text = dialogueManager.CurrentDialogueItem.Text;
 			}
 			else
+			{
 				dialogueManager.NextSentence();
+			}
 		}
 	}
 
@@ -88,8 +94,6 @@ public class DialogueMenuManager : MonoBehaviour
 	{
 		StopAllCoroutines();
 		quoteText.text = "";
-		dialoguePartnerInformation = null;
-		dialogueItems = null;
 		dialoguePanel.gameObject.SetActive(false);
 	}
 
@@ -107,7 +111,6 @@ public class DialogueMenuManager : MonoBehaviour
 
 	public void InitiateDialogue(DialoguePartnerInformation dialoguePartnerInformation, params DialogueItem[] dialogue)
 	{
-		this.dialoguePartnerInformation = dialoguePartnerInformation;
-		this.dialogueItems = dialogue;
+		dialogueManager.StartDialogue(dialoguePartnerInformation, dialogue);
 	}
 }

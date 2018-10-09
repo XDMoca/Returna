@@ -3,7 +3,9 @@ using UnityEngine;
 
 public class InteractionInterface : MonoBehaviour
 {
-	private IInteractable interactionTarget;
+	public static InteractionInterface instance = null;
+	[HideInInspector]
+	public  IInteractable interactionTarget;
 	private SceneTransitionManager sceneTransitionManager;
 
 	[SerializeField]
@@ -24,6 +26,14 @@ public class InteractionInterface : MonoBehaviour
 
 	void Awake()
 	{
+		if (instance == null)
+		{
+			instance = this;
+		}
+		else if (instance != this)
+		{
+			Destroy(gameObject);
+		}
 		sceneTransitionManager = FindObjectOfType<SceneTransitionManager>();
 		SetupInteractionIndicator();
 	}
@@ -51,16 +61,7 @@ public class InteractionInterface : MonoBehaviour
 
 	public void Interact()
 	{
-		if (interactionTarget is InteractableEntity)
-		{
-			InteractableEntity target = interactionTarget as InteractableEntity;
-			if (!Interacting)
-			{
-				DialogueMenuManager.instance.InitiateDialogue((target as DialoguePartner).DialoguePartnerInformation, target.Dialogue);
-			}
-		}
-
-		else if (interactionTarget is InteractableDoor)
+		if (interactionTarget is InteractableDoor)
 		{
 			InteractableDoor target = interactionTarget as InteractableDoor;
 			sceneTransitionManager.GoToNextArea(target.NextAreaName, target.NextAreaSpawnPointIdentifier);

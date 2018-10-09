@@ -107,6 +107,7 @@ GameObject:
   - component: {fileID: 223965826018501002}
   - component: {fileID: 114762655428719340}
   - component: {fileID: 114025929928555772}
+  - component: {fileID: 114882146276993184}
   - component: {fileID: 114452379732551926}
   - component: {fileID: 95277391146530992}
   - component: {fileID: 114316952114992820}
@@ -298,18 +299,6 @@ MonoBehaviour:
   currentSceneType: 0
   playerPrefab: {fileID: 1001343125072836, guid: 6eb727e6515a6ed48b7a20bd90418cea,
     type: 2}
-  currentOpponentInformation:
-    Vehicle: {fileID: 0}
-    PlayerVictoryDialogue:
-      Text: 
-      SpeakerName: 
-      DialogueEvent: 0
-    OpponentVictoryDialogue:
-      Text: 
-      SpeakerName: 
-      DialogueEvent: 0
-    PrizeMoney: 0
-    ShopItems: []
 --- !u!114 &114337589256860452
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -589,6 +578,7 @@ MonoBehaviour:
     type: 2}
   ShopCanvasPrefab: {fileID: 1453110814481974, guid: 26e51b4bd0a269b4d89fde5e0d66a63a,
     type: 2}
+  IsShopMenuOpen: 0
 --- !u!114 &114859762845304392
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -642,6 +632,22 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114882146276993184
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1646444355001756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 141a27b5c32f35f46bae3057a2b9467b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentDialogueItem:
+    Text: 
+    SpeakerName: 
+    DialogueEvent: 0
+  InDialogue: 0
 --- !u!114 &114907607822559640
 MonoBehaviour:
   m_ObjectHideFlags: 1
