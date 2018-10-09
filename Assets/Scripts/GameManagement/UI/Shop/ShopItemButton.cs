@@ -32,9 +32,14 @@ public class ShopItemButton : MonoBehaviour, ISelectHandler, ISubmitHandler, ICa
 
 	public void OnSubmit(BaseEventData eventData)
 	{
-		if (InventoryManager.instance.TryBuyWeapon(shopItem.Price, shopItem.Weapon))
+		try
 		{
+			InventoryManager.instance.TryBuyWeapon(shopItem.Price, shopItem.Weapon);
 			SetTextValues();
+		}
+		catch (NotifyException exception)
+		{
+			NotificationHandler.instance.Display(exception.Message);
 		}
 	}
 

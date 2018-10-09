@@ -114,6 +114,7 @@ GameObject:
   - component: {fileID: 114877236806025564}
   - component: {fileID: 114859762845304392}
   - component: {fileID: 114825065831310332}
+  - component: {fileID: 114917819570613004}
   m_Layer: 5
   m_Name: GameManagerAndHUD
   m_TagString: GameController
@@ -675,6 +676,20 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114917819570613004
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1646444355001756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9663b8fb44fc774ab7c72a73b2f3ea6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NotificationDuration: 3
+  errorMessageCanvasPrefab: {fileID: 1063086170895108, guid: b129d4b0d7faf9c43ba893c7fe593817,
+    type: 2}
 --- !u!114 &114945177893804172
 MonoBehaviour:
   m_ObjectHideFlags: 1

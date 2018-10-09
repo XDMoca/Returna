@@ -28,18 +28,18 @@ public class InventoryManager : MonoBehaviour
 			OnMoneyChange(this, new EventArgs());
 	}
 
-	public bool TryBuyWeapon(int moneyToSpend, Weapon weaponToBuy)
+	public void TryBuyWeapon(int moneyToSpend, Weapon weaponToBuy)
 	{
-		if (moneyToSpend > Money)
-			return false;
-
 		if (OwnsWeapon(weaponToBuy))
-			return false;
+			throw new NotifyException("You already own this weapon.");
+
+		if (moneyToSpend > Money)
+			throw new NotifyException("You cannot afford this weapon.");
+
 
 		Money -= moneyToSpend;
 		InventoryWeapons.Add(weaponToBuy);
 		MoneyChanged();
-		return true;
 	}
 
 	public bool OwnsWeapon(Weapon weaponToCheck)

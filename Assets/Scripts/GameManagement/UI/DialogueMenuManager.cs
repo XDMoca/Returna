@@ -52,7 +52,7 @@ public class DialogueMenuManager : MonoBehaviour
 		if (!InputManager.instance.inputsContainer.interactPressed)
 			return;
 
-		if (!dialogueManager.InDialogue)
+		if (!InteractionInterface.instance.Interacting)
 		{
 			if (InteractionInterface.instance.InteractionTargetInRange)
 			{
@@ -63,7 +63,7 @@ public class DialogueMenuManager : MonoBehaviour
 				}
 			}
 		}
-		else
+		else if(dialogueManager.InDialogue)
 		{
 			if (isTypingOutQuote)
 			{
