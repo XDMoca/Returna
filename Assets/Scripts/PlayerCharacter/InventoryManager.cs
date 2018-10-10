@@ -7,6 +7,7 @@ public class InventoryManager : MonoBehaviour
 	public static InventoryManager instance = null;
 	public int Money;
 	public List<Weapon> InventoryWeapons = new List<Weapon>();
+	public Weapon EquippedWeapon;
 
 	public event EventHandler OnMoneyChange;
 
@@ -20,6 +21,8 @@ public class InventoryManager : MonoBehaviour
 		{
 			Destroy(gameObject);
 		}
+		if (EquippedWeapon == null)
+			EquippedWeapon = InventoryWeapons[0];
 	}
 
 	private void MoneyChanged()
@@ -42,7 +45,23 @@ public class InventoryManager : MonoBehaviour
 		MoneyChanged();
 	}
 
+	public void TryEquipWeapon(Weapon weaponToEquip)
+	{
+		if (!OwnsWeapon(weaponToEquip))
+			throw new NotifyException("You do not own this weapon.");
+
+		EquippedWeapon = weaponToEquip;
+	}
+
 	public bool OwnsWeapon(Weapon weaponToCheck)
+	{
+		if (InventoryWeapons.Contains(weaponToCheck))
+			return true;
+
+		return false;
+	}
+
+	public bool IsEquipped(Weapon weaponToCheck)
 	{
 		if (InventoryWeapons.Contains(weaponToCheck))
 			return true;

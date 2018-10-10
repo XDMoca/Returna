@@ -31,7 +31,7 @@ public class DialogueMenuManager : MonoBehaviour
 		{
 			Destroy(gameObject);
 		}
-		dialogueManager = GetComponent<DialogueManager>();
+		dialogueManager = new DialogueManager();
 	}
 
 	void Start()

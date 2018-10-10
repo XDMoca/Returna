@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
-
-public class DialogueManager : MonoBehaviour
+public class DialogueManager
 {
 	private Queue<DialogueItem> dialogueItems;
 	private IDialoguePartnerInformation dialoguePartnerInformation;
-
-	[HideInInspector]
+	
 	public DialogueItem CurrentDialogueItem;
 
 	public bool InDialogue = false;

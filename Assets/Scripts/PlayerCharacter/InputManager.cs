@@ -37,5 +37,6 @@ public class InputManager : MonoBehaviour
 		inputsContainer.HorizontalMovementInput = Input.GetAxisRaw(Constants.Inputs.Horizontal);
 		inputsContainer.VerticalMovementInput = Input.GetAxisRaw(Constants.Inputs.Vertical);
 		inputsContainer.interactPressed = Input.GetButtonDown(Constants.Inputs.Interact);
+		inputsContainer.inventoryPressed = Input.GetButtonDown(Constants.Inputs.Inventory);
 	}
 }

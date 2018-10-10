@@ -107,7 +107,6 @@ GameObject:
   - component: {fileID: 223965826018501002}
   - component: {fileID: 114762655428719340}
   - component: {fileID: 114025929928555772}
-  - component: {fileID: 114882146276993184}
   - component: {fileID: 114452379732551926}
   - component: {fileID: 95277391146530992}
   - component: {fileID: 114316952114992820}
@@ -115,6 +114,7 @@ GameObject:
   - component: {fileID: 114859762845304392}
   - component: {fileID: 114825065831310332}
   - component: {fileID: 114917819570613004}
+  - component: {fileID: 114821007095160226}
   m_Layer: 5
   m_Name: GameManagerAndHUD
   m_TagString: GameController
@@ -564,6 +564,22 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &114821007095160226
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1646444355001756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 377d2c124337cde4e9305ff90c6b340a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InventoryItemButtonPrefab: {fileID: 1702930201623992, guid: 61767762cd114aa41a30c72b635c8d94,
+    type: 2}
+  InventoryCanvasPrefab: {fileID: 1453110814481974, guid: 1e932a1533d8fc543bb901261f03de61,
+    type: 2}
+  IsInventoryMenuOpen: 0
 --- !u!114 &114825065831310332
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -633,22 +649,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114882146276993184
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1646444355001756}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 141a27b5c32f35f46bae3057a2b9467b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CurrentDialogueItem:
-    Text: 
-    SpeakerName: 
-    DialogueEvent: 0
-  InDialogue: 0
 --- !u!114 &114907607822559640
 MonoBehaviour:
   m_ObjectHideFlags: 1

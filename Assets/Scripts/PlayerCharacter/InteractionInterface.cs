@@ -15,7 +15,7 @@ public class InteractionInterface : MonoBehaviour
 	[ReadOnly]
 	public bool InteractionTargetInRange;
 	
-	public bool Interacting { get { return DialogueMenuManager.instance.InDialogue || ShopMenuManager.instance.IsShopMenuOpen; } }
+	public bool Interacting { get { return DialogueMenuManager.instance.InDialogue || ShopMenuManager.instance.IsShopMenuOpen || InventoryMenuManager.instance.IsInventoryMenuOpen; } }
 
 	[SerializeField]
 	private float interactionDetectionRange;

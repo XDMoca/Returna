@@ -8,11 +8,14 @@ public class InputsContainer
 	public float VerticalMovementInput = 0;
 	[ReadOnly]
 	public bool interactPressed = false;
+	[ReadOnly]
+	public bool inventoryPressed = false;
 
 	public void ClearInputs()
 	{
 		HorizontalMovementInput = 0;
 		VerticalMovementInput = 0;
 		interactPressed = false;
+		inventoryPressed = false;
 	}
 }
