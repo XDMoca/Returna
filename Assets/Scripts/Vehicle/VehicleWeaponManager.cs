@@ -4,9 +4,8 @@ public class VehicleWeaponManager : MonoBehaviour
 {
 
 	AVehicleInputManager inputs;
-
-	[SerializeField]
-	Weapon activeWeapon;
+	
+	private Weapon activeWeapon;
 
 	[SerializeField]
 	[ReadOnly]
@@ -19,6 +18,7 @@ public class VehicleWeaponManager : MonoBehaviour
 	{
 		inputs = GetComponent<AVehicleInputManager>();
 		vehicleCollider = GetComponentInChildren<MeshCollider>();
+		activeWeapon = InventoryManager.instance.EquippedWeapon;
 	}
 
 	void Update()
