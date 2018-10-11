@@ -54,6 +54,7 @@ public class InventoryMenuManager : MonoBehaviour
 			inventoryCanvasInstance.AddInventoryItemButton(button);
 		}
 		inventoryCanvasInstance.SetFirstElementAsActive();
+		MenuSoundSource.instance.PlayOpenSound();
 		IsInventoryMenuOpen = true;
 	}
 
@@ -73,6 +74,7 @@ public class InventoryMenuManager : MonoBehaviour
 			return;
 
 		Destroy(inventoryCanvasInstance.gameObject);
+		MenuSoundSource.instance.PlayCloseSound();
 		IsInventoryMenuOpen = false;
 	}
 }

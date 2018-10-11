@@ -38,6 +38,7 @@ public class ShopMenuManager : MonoBehaviour
 			shopCanvasInstance.AddShopItemButton(button);
 		}
 		shopCanvasInstance.SetFirstElementAsActive();
+		MenuSoundSource.instance.PlayOpenSound();
 		IsShopMenuOpen = true;
 	}
 
@@ -52,6 +53,7 @@ public class ShopMenuManager : MonoBehaviour
 			return;
 
 		Destroy(shopCanvasInstance.gameObject);
+		MenuSoundSource.instance.PlayCloseSound();
 		IsShopMenuOpen = false;
 	}
 }

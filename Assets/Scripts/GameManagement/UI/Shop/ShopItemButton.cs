@@ -28,6 +28,7 @@ public class ShopItemButton : MonoBehaviour, ISelectHandler, ISubmitHandler, ICa
 	public void OnSelect(BaseEventData eventData)
 	{
 		ShopMenuManager.instance.UpdateItemDetailPanel(shopItem);
+		MenuSoundSource.instance.PlayNextItemSound();
 	}
 
 	public void OnSubmit(BaseEventData eventData)
@@ -35,6 +36,7 @@ public class ShopItemButton : MonoBehaviour, ISelectHandler, ISubmitHandler, ICa
 		try
 		{
 			InventoryManager.instance.TryBuyWeapon(shopItem.Price, shopItem.Weapon);
+			MenuSoundSource.instance.PlayActionSuccessSound();
 			SetTextValues();
 		}
 		catch (NotifyException exception)

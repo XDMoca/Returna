@@ -28,6 +28,7 @@ public class InventoryItemButton : MonoBehaviour, ISelectHandler, ISubmitHandler
 	public void OnSelect(BaseEventData eventData)
 	{
 		InventoryMenuManager.instance.UpdateItemDetailPanel(inventoryItem);
+		MenuSoundSource.instance.PlayNextItemSound();
 	}
 
 	public void OnSubmit(BaseEventData eventData)
@@ -35,6 +36,7 @@ public class InventoryItemButton : MonoBehaviour, ISelectHandler, ISubmitHandler
 		try
 		{
 			InventoryManager.instance.TryEquipWeapon(inventoryItem);
+			MenuSoundSource.instance.PlayActionSuccessSound();
 			InventoryMenuManager.instance.UpdateButtons();
 		}
 		catch (NotifyException exception)

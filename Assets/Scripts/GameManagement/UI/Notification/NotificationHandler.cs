@@ -30,5 +30,6 @@ public class NotificationHandler : MonoBehaviour
 		}
 
 		errorMessage.Display(notificationMessage, NotificationDuration);
+		MenuSoundSource.instance.PlayActionFailedSound();
 	}
 }
