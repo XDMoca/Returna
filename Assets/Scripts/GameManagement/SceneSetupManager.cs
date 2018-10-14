@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class GameLoadManager : MonoBehaviour
+public class SceneSetupManager : MonoBehaviour
 {
 
 	[SerializeField]

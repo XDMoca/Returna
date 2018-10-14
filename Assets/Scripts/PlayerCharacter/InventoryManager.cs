@@ -5,9 +5,9 @@ using UnityEngine;
 public class InventoryManager : MonoBehaviour
 {
 	public static InventoryManager instance = null;
-	public int Money;
-	public List<Weapon> InventoryWeapons = new List<Weapon>();
-	public Weapon EquippedWeapon;
+	public int Money { get { return CurrentGameDataManager.instance.Money; } set { CurrentGameDataManager.instance.Money = value; } }
+	public List<Weapon> InventoryWeapons { get { return CurrentGameDataManager.instance.InventoryWeapons; } set { CurrentGameDataManager.instance.InventoryWeapons = value; } }
+	public Weapon EquippedWeapon { get { return CurrentGameDataManager.instance.EquippedWeapon; } set { CurrentGameDataManager.instance.EquippedWeapon = value; } }
 
 	public event EventHandler OnMoneyChange;
 

@@ -9,7 +9,7 @@ public class SceneTransitionManager : MonoBehaviour
 
 	private Animator animator;
 	private GameObject player;
-	private string worldSceneName = "Scenes/TownScene";
+	private string worldSceneName = Constants.TownSceneName;
 	private ESpawnPointIdentifiers nextSceneSpawnPointIdentifier;
 	public ESceneType currentSceneType;
 	private BattleManager battleManager;

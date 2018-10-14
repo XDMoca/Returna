@@ -1,5 +1,10 @@
-﻿public class Constants
+﻿using UnityEngine;
+
+public class Constants
 {
+	public static readonly string SaveFilePath = Application.persistentDataPath + "/saveData.dat";
+	public static readonly string TownSceneName = "Scenes/TownScene";
+
 	public class Inputs
 	{
 		public static readonly string Horizontal = "Horizontal";

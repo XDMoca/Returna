@@ -11,6 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8645a9dfef93acc4198ff74e450662ad, type: 3}
   m_Name: Flamethrower
   m_EditorClassIdentifier: 
+  ID: 3
   Name: Flamethrower
   FireRate: 0.01
   Projectile: {fileID: 1312180976101800, guid: e4bbcd20477214b4083741649075231a, type: 2}
