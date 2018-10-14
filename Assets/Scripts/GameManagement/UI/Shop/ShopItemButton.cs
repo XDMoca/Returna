@@ -41,7 +41,7 @@ public class ShopItemButton : MonoBehaviour, ISelectHandler, ISubmitHandler, ICa
 		}
 		catch (NotifyException exception)
 		{
-			NotificationHandler.instance.Display(exception.Message);
+			NotificationHandler.instance.DisplayErrorNotification(exception.Message);
 		}
 	}
 

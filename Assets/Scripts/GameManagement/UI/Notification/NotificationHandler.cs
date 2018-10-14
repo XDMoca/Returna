@@ -4,11 +4,16 @@ public class NotificationHandler : MonoBehaviour
 {
 
 	public static NotificationHandler instance = null;
-	private ErrorMessageCanvas errorMessage;
+	private NotificationCanvas notificationInstance;
 	[SerializeField]
 	private float NotificationDuration;
 	[SerializeField]
-	private GameObject errorMessageCanvasPrefab;
+	private GameObject NotificationCanvasPrefab;
+
+	[SerializeField]
+	private Color notificationPanelColor;
+	[SerializeField]
+	private Color errorNotificationPanelColor;
 
 	private void Awake()
 	{
@@ -22,14 +27,25 @@ public class NotificationHandler : MonoBehaviour
 		}
 	}
 
-	public void Display(string notificationMessage)
+	public void DisplayErrorNotification(string notificationMessage)
 	{
-		if (errorMessage == null)
-		{
-			errorMessage = Instantiate(errorMessageCanvasPrefab).GetComponent<ErrorMessageCanvas>();
-		}
-
-		errorMessage.Display(notificationMessage, NotificationDuration);
+		InstantiateNotification();
+		notificationInstance.Display(notificationMessage, NotificationDuration, errorNotificationPanelColor);
 		MenuSoundSource.instance.PlayActionFailedSound();
+	}
+
+	public void DisplayNotification(string notificationMessage)
+	{
+		InstantiateNotification();
+		notificationInstance.Display(notificationMessage, NotificationDuration, notificationPanelColor);
+		MenuSoundSource.instance.PlayActionSuccessSound();
+	}
+
+	private void InstantiateNotification()
+	{
+		if (notificationInstance == null)
+		{
+			notificationInstance = Instantiate(NotificationCanvasPrefab).GetComponent<NotificationCanvas>();
+		}
 	}
 }

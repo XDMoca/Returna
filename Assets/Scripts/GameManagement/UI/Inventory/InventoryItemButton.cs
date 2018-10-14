@@ -41,7 +41,7 @@ public class InventoryItemButton : MonoBehaviour, ISelectHandler, ISubmitHandler
 		}
 		catch (NotifyException exception)
 		{
-			NotificationHandler.instance.Display(exception.Message);
+			NotificationHandler.instance.DisplayErrorNotification(exception.Message);
 		}
 	}
 

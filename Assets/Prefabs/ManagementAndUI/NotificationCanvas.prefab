@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 222886334526797992}
   - component: {fileID: 114447338619323492}
   m_Layer: 5
-  m_Name: ErrorMessagePanel
+  m_Name: NotificationPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41,9 +41,9 @@ GameObject:
   - component: {fileID: 114391562159585590}
   - component: {fileID: 95023325999220266}
   - component: {fileID: 225382822049873844}
-  - component: {fileID: 114502625869994394}
+  - component: {fileID: 114223192483012878}
   m_Layer: 5
-  m_Name: ErrorMessageCanvas
+  m_Name: NotificationCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -60,7 +60,7 @@ GameObject:
   - component: {fileID: 222488290409792954}
   - component: {fileID: 114042598020155082}
   m_Layer: 5
-  m_Name: ErrorMessageText
+  m_Name: NotificationText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -197,6 +197,19 @@ MonoBehaviour:
   - {fileID: 0}
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &114223192483012878
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1063086170895108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be616748bb3d32e4e8b230e8eab45247, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MessageText: {fileID: 114042598020155082}
+  panelBackground: {fileID: 114447338619323492}
 --- !u!114 &114391562159585590
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -240,18 +253,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114502625869994394
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1063086170895108}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be616748bb3d32e4e8b230e8eab45247, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MessageText: {fileID: 114042598020155082}
 --- !u!114 &114594327281415016
 MonoBehaviour:
   m_ObjectHideFlags: 1

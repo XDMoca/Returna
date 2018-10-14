@@ -829,8 +829,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NotificationDuration: 3
-  errorMessageCanvasPrefab: {fileID: 1063086170895108, guid: b129d4b0d7faf9c43ba893c7fe593817,
+  NotificationCanvasPrefab: {fileID: 1063086170895108, guid: b129d4b0d7faf9c43ba893c7fe593817,
     type: 2}
+  notificationPanelColor: {r: 0.02745098, g: 0, b: 0.5568628, a: 0.69803923}
+  errorNotificationPanelColor: {r: 1, g: 0.003921569, b: 0, a: 0.69803923}
 --- !u!114 &114945177893804172
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -39,6 +39,7 @@ public class SaveGameDataManager : MonoBehaviour
 		};
 		formatter.Serialize(fileStream, saveData);
 		fileStream.Close();
+		NotificationHandler.instance.DisplayNotification("Save Successful");
 	}
 }
 

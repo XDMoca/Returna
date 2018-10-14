@@ -9,7 +9,7 @@ public class SceneTransitionManager : MonoBehaviour
 
 	private Animator animator;
 	private GameObject player;
-	private string worldSceneName = Constants.TownSceneName;
+	private string worldSceneName;
 	private ESpawnPointIdentifiers nextSceneSpawnPointIdentifier;
 	public ESceneType currentSceneType;
 	private BattleManager battleManager;
@@ -35,6 +35,7 @@ public class SceneTransitionManager : MonoBehaviour
 		animator = GetComponent<Animator>();
 		battleManager = GetComponent<BattleManager>();
 		SceneManager.sceneLoaded += OnLevelLoaded;
+		worldSceneName = Constants.TownSceneName;
 
 		if (player == null)
 		{
