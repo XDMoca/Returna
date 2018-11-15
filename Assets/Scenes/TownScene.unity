@@ -562,7 +562,7 @@ MonoBehaviour:
     SpeakerName: Query-dono
     DialogueEvent: 1
   DialoguePartnerInformation:
-    Vehicle: {fileID: 1913397928330842, guid: 75ace3ce334cab54b968cbfdf42b919a, type: 2}
+    Vehicle: {fileID: 1218356432109970, guid: 75ace3ce334cab54b968cbfdf42b919a, type: 2}
     PlayerVictoryDialogue:
       Text: GGs
       SpeakerName: Query-dono
