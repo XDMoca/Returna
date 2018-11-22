@@ -15,6 +15,7 @@ MonoBehaviour:
   Name: Flamethrower
   FireRate: 0.01
   Projectile: {fileID: 1312180976101800, guid: e4bbcd20477214b4083741649075231a, type: 2}
-  WeaponModel: {fileID: 0}
+  WeaponObject: {fileID: 1659547856355760, guid: 0b434544eb0bf5f468cff306b1bd1f90,
+    type: 2}
   Description: I BURN! CAAAAN'T HOOOLD MEEEE NOOOOW!
   FireSound: {fileID: 8300000, guid: 20b57a771ebe3e64a8414abc7ae182ed, type: 3}

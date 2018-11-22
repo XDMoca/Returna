@@ -7,7 +7,7 @@ public class Weapon : ScriptableObject
 	public string Name;
 	public float FireRate;
 	public GameObject Projectile;
-	public GameObject WeaponModel;
+	public GameObject WeaponObject;
 	public string Description;
 	public AudioClip FireSound;
 }

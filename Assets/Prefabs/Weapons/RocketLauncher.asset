@@ -15,6 +15,7 @@ MonoBehaviour:
   Name: Rocket Launcher
   FireRate: 1
   Projectile: {fileID: 1312180976101800, guid: e4bbcd20477214b4083741649075231a, type: 2}
-  WeaponModel: {fileID: 0}
+  WeaponObject: {fileID: 1690740430876198, guid: 0e20c072fc4f46746a45282150690f4f,
+    type: 2}
   Description: Stranger, Stranger... Now that's a weapon!
   FireSound: {fileID: 8300000, guid: 20b57a771ebe3e64a8414abc7ae182ed, type: 3}

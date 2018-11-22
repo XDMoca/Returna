@@ -15,6 +15,7 @@ MonoBehaviour:
   Name: Machine Gun
   FireRate: 0.1
   Projectile: {fileID: 1312180976101800, guid: e4bbcd20477214b4083741649075231a, type: 2}
-  WeaponModel: {fileID: 0}
+  WeaponObject: {fileID: 1173906005920300, guid: e3014e9bbb8019f44a9541c7c7e46032,
+    type: 2}
   Description: Entry Level Machine Gun
   FireSound: {fileID: 8300000, guid: 20b57a771ebe3e64a8414abc7ae182ed, type: 3}

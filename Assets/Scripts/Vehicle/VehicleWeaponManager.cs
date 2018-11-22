@@ -5,7 +5,10 @@ public class VehicleWeaponManager : MonoBehaviour
 
 	AVehicleInputManager inputs;
 	
-	private Weapon activeWeapon;
+	[SerializeField]
+	private Weapon ActiveWeapon;
+
+	private WeaponObject weaponObject;
 
 	[SerializeField]
 	[ReadOnly]
@@ -16,7 +19,11 @@ public class VehicleWeaponManager : MonoBehaviour
 	void Start()
 	{
 		inputs = GetComponentInParent<AVehicleInputManager>();
-		activeWeapon = InventoryManager.instance.EquippedWeapon;
+
+		if (ActiveWeapon == null)
+			ActiveWeapon = InventoryManager.instance.EquippedWeapon;
+
+		weaponObject = Instantiate(ActiveWeapon.WeaponObject, transform, false).GetComponent<WeaponObject>();
 	}
 
 	void Update()
@@ -39,14 +46,14 @@ public class VehicleWeaponManager : MonoBehaviour
 
 	void UpdateFireLoop()
 	{
-		if (timeSinceLastFire < activeWeapon.FireRate)
+		if (timeSinceLastFire < ActiveWeapon.FireRate)
 		{
 			timeSinceLastFire += Time.deltaTime;
 		}
 
 		if (Firing)
 		{
-			if (timeSinceLastFire >= activeWeapon.FireRate)
+			if (timeSinceLastFire >= ActiveWeapon.FireRate)
 			{
 				FireProjectile();
 			}
@@ -56,7 +63,7 @@ public class VehicleWeaponManager : MonoBehaviour
 	void FireProjectile()
 	{
 		timeSinceLastFire = 0;
-		Collider projectileCollider = Instantiate(activeWeapon.Projectile, transform.position + new Vector3(0, 0.2f, 0), transform.rotation).GetComponent<Collider>();
-		AudioSource.PlayClipAtPoint(activeWeapon.FireSound, transform.position);
+		Instantiate(ActiveWeapon.Projectile, weaponObject.ProjectileSpawnPoint.position, transform.rotation);
+		AudioSource.PlayClipAtPoint(ActiveWeapon.FireSound, transform.position);
 	}
 }
