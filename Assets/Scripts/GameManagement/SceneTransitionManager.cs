@@ -39,7 +39,8 @@ public class SceneTransitionManager : MonoBehaviour
 
 		if (player == null)
 		{
-			player = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
+			Transform spawnPoint = FindObjectOfType<AreaSpawnPoint>().transform;
+			player = Instantiate(playerPrefab, spawnPoint.position, Quaternion.identity);
 			BindCameraToPlayer();
 		}
 		animator.SetTrigger("FadeIn");
