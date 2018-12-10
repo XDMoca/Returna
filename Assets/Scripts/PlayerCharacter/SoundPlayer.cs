@@ -15,12 +15,12 @@ public class SoundPlayer : MonoBehaviour
 		source = GetComponent<AudioSource>();
 	}
 
-	private void PlaySound(AudioClip clip)
+	private void PlaySound(AudioClip clip, float volumeScale = 1)
 	{
 		if(clip == null)
 			return;
 
-		source.PlayOneShot(clip);
+		source.PlayOneShot(clip, volumeScale);
 	}
 	private void PlaySoundInstance(AudioClip clip)
 	{
@@ -32,6 +32,6 @@ public class SoundPlayer : MonoBehaviour
 
 	public void PlayFootstep()
 	{
-		PlaySound(footstepClip);
+		PlaySound(footstepClip, 7);
 	}
 }
