@@ -3,7 +3,7 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
@@ -14,6 +14,7 @@ MonoBehaviour:
   ID: 3
   Name: Flamethrower
   FireRate: 0.01
+  MaxAmmoCount: 200
   Projectile: {fileID: 1312180976101800, guid: e4bbcd20477214b4083741649075231a, type: 2}
   WeaponObject: {fileID: 1659547856355760, guid: 0b434544eb0bf5f468cff306b1bd1f90,
     type: 2}

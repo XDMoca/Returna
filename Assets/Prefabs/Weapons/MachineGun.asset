@@ -3,7 +3,7 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
@@ -14,6 +14,7 @@ MonoBehaviour:
   ID: 1
   Name: Machine Gun
   FireRate: 0.1
+  MaxAmmoCount: 100
   Projectile: {fileID: 1312180976101800, guid: e4bbcd20477214b4083741649075231a, type: 2}
   WeaponObject: {fileID: 1173906005920300, guid: e3014e9bbb8019f44a9541c7c7e46032,
     type: 2}

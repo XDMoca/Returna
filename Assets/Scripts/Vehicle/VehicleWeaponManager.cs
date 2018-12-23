@@ -16,12 +16,18 @@ public class VehicleWeaponManager : MonoBehaviour
 
 	private float timeSinceLastFire = 0;
 
+	[SerializeField]
+	[ReadOnly]
+	private int currentAmmo;
+
 	void Start()
 	{
 		inputs = GetComponentInParent<AVehicleInputManager>();
 
 		if (ActiveWeapon == null)
 			ActiveWeapon = InventoryManager.instance.EquippedWeapon;
+
+		currentAmmo = ActiveWeapon.MaxAmmoCount;
 
 		weaponObject = Instantiate(ActiveWeapon.WeaponObject, transform, false).GetComponent<WeaponObject>();
 	}
@@ -62,8 +68,19 @@ public class VehicleWeaponManager : MonoBehaviour
 
 	void FireProjectile()
 	{
+		if (currentAmmo <= 0)
+			return;
+
 		timeSinceLastFire = 0;
 		Instantiate(ActiveWeapon.Projectile, weaponObject.ProjectileSpawnPoint.position, transform.rotation);
 		AudioSource.PlayClipAtPoint(ActiveWeapon.FireSound, transform.position);
+		currentAmmo -= 1;
+	}
+
+	public void CollectAmmo(int amount)
+	{
+		currentAmmo += amount;
+		if (currentAmmo > ActiveWeapon.MaxAmmoCount)
+			currentAmmo = ActiveWeapon.MaxAmmoCount;
 	}
 }
