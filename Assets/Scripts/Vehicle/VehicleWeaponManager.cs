@@ -1,12 +1,12 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class VehicleWeaponManager : MonoBehaviour
 {
 
 	AVehicleInputManager inputs;
 	
-	[SerializeField]
-	private Weapon ActiveWeapon;
+	public Weapon ActiveWeapon;
 
 	private WeaponObject weaponObject;
 
@@ -15,15 +15,15 @@ public class VehicleWeaponManager : MonoBehaviour
 	private bool Firing = false;
 
 	private float timeSinceLastFire = 0;
-
-	[SerializeField]
+	
 	[ReadOnly]
-	private int currentAmmo;
+	public int currentAmmo;
 
-	void Start()
+	public event EventHandler OnAmmoChange;
+
+	void Awake()
 	{
 		inputs = GetComponentInParent<AVehicleInputManager>();
-
 		if (ActiveWeapon == null)
 			ActiveWeapon = InventoryManager.instance.EquippedWeapon;
 
@@ -75,6 +75,7 @@ public class VehicleWeaponManager : MonoBehaviour
 		Instantiate(ActiveWeapon.Projectile, weaponObject.ProjectileSpawnPoint.position, transform.rotation);
 		AudioSource.PlayClipAtPoint(ActiveWeapon.FireSound, transform.position);
 		currentAmmo -= 1;
+		AmmoChanged();
 	}
 
 	public void CollectAmmo(int amount)
@@ -82,5 +83,12 @@ public class VehicleWeaponManager : MonoBehaviour
 		currentAmmo += amount;
 		if (currentAmmo > ActiveWeapon.MaxAmmoCount)
 			currentAmmo = ActiveWeapon.MaxAmmoCount;
+		AmmoChanged();
+	}
+
+	private void AmmoChanged()
+	{
+		if (OnAmmoChange != null)
+			OnAmmoChange(this, new EventArgs());
 	}
 }

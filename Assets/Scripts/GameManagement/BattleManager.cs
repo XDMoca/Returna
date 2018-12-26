@@ -32,6 +32,7 @@ public class BattleManager : MonoBehaviour
 		
 		hud = FindObjectOfType<BattleHUDManager>();
 		hud.InitialiseHealthBars(playerHealth, enemyHealth);
+		hud.InitialiseAmmoText(playerHealth.GetComponentInChildren<VehicleWeaponManager>());
 	}
 
 	private void CheckBattleStatus()
